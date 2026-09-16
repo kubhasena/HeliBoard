@@ -31,8 +31,43 @@ import kotlinx.serialization.modules.polymorphic
 object LayoutParser {
     private const val TAG = "LayoutParser"
     private val layoutCache = hashMapOf<String, (KeyboardParams) -> MutableList<MutableList<KeyData>>>()
+    private val brahmicVowelSlotCache = hashMapOf<String, Map<Int, Int>>()
 
-    fun clearCache() = layoutCache.clear()
+    fun clearCache() {
+        layoutCache.clear()
+        brahmicVowelSlotCache.clear()
+    }
+
+    /**
+     *  Brahmic vowels of the main layout with the easiest slot each of them sits in, see
+     *  [BrahmicVowelKeys]. Parses the layout a second time because the scan needs the selector
+     *  branches of all shift states, which [parseLayout] has already resolved away.
+     */
+    fun brahmicVowelSlots(params: KeyboardParams, context: Context): Map<Int, Int> {
+        val layoutName = params.mId.subtype.mainLayoutName
+        return brahmicVowelSlotCache.getOrPut(layoutName + params.mId.locale.toLanguageTag()) {
+            val rows = parseRawLayout(LayoutType.MAIN, layoutName, context).toMutableList()
+            if (layoutName.endsWith("+")) // extra keys are part of the layout for these
+                for (i in 1..rows.size) params.mLocaleKeyboardInfos.getExtraKeys(i)?.let { rows.add(it) }
+            BrahmicVowelKeys.scanSlots(
+                rows,
+                { params.mLocaleKeyboardInfos.getPopupKeys(it) },
+                { params.mLocaleKeyboardInfos.getPriorityPopupKeys(it) },
+            )
+        }
+    }
+
+    private fun parseRawLayout(layoutType: LayoutType, layoutName: String, context: Context): List<List<AbstractKeyData>> {
+        val content = getLayoutFileContent(layoutType, layoutName.substringBefore("+"), context).trimStart()
+        if (content.startsWith("[") || (LayoutUtilsCustom.isCustomLayout(layoutName) && content.startsWith("//"))) {
+            try {
+                return parseJsonString(content, false)
+            } catch (e: Exception) {
+                Log.w(TAG, "could not parse json layout for $layoutName", e)
+            }
+        }
+        return parseSimpleString(content)
+    }
 
     fun parseLayout(layoutType: LayoutType, params: KeyboardParams, context: Context): MutableList<MutableList<KeyData>> {
         if (layoutType == LayoutType.FUNCTIONAL && !params.mId.element.takesFunctionalKeys)

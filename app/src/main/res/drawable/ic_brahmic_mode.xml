@@ -1,0 +1,13 @@
+<!--
+    Toolbar icon for cycling Devanagari / Brahmic input modes.
+    SPDX-License-Identifier: GPL-3.0-only
+-->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:height="24dp"
+    android:width="24dp"
+    android:viewportHeight="24"
+    android:viewportWidth="24">
+    <path
+        android:fillColor="#FFF"
+        android:pathData="M4,4h16v2H4zM6,8h3v12H7V10H6zM11,8h7v2h-5v3h4v2h-4v5h-2z"/>
+</vector>

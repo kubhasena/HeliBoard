@@ -343,8 +343,8 @@ sealed interface KeyData : AbstractKeyData {
         val newWidth = if (width == 0f) getDefaultWidth(params) else width
         if (type == KeyType.PLACEHOLDER) return Key.KeyParams.newSpacer(params, newWidth)
 
-        val newCode: Int
-        val newLabel: String
+        var newCode: Int
+        var newLabel: String
         if (code in KeyCode.Spec.CURRENCY) {
             // special treatment necessary, because we may need to encode it in the label
             // (currency is a string, so might have more than 1 codepoint, e.g. for Nepal)
@@ -353,6 +353,10 @@ sealed interface KeyData : AbstractKeyData {
         } else {
             newCode = code
             newLabel = KeyLabel.keyLabelToActualLabel(label, params)
+            if (!params.mBrahmicVowelRemap.isEmpty) {
+                newLabel = params.mBrahmicVowelRemap.remapLabel(newLabel)
+                if (newCode > 0) newCode = params.mBrahmicVowelRemap.remapCodePoint(newCode)
+            }
         }
         var newLabelFlags = labelFlags or additionalLabelFlags or getAdditionalLabelFlags(params)
         val newPopupKeys = popup.merge(getAdditionalPopupKeys(params))

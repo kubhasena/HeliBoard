@@ -280,6 +280,7 @@ class Event private constructor(
          * @return an identical event marked as consumed.
          */
         // A consumed event should not input any text at all, so we pass the empty string as text.
+        @JvmStatic
         fun createConsumedEvent(source: Event) =
              Event(source.eventType, source.text, source.codePoint, source.keyCode, source.metaState,
                     source.x, source.y, source.suggestedWordInfo, source.flags or FLAG_CONSUMED, source.nextEvent)

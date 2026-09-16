@@ -62,6 +62,11 @@ fun PreferencesScreen(
             Settings.PREF_KEYPRESS_SOUND_VOLUME else null,
         Settings.PREF_SAVE_SUBTYPE_PER_APP,
         Settings.PREF_SHOW_EMOJI_DESCRIPTIONS,
+        R.string.settings_category_brahmic,
+        Settings.PREF_BRAHMIC_INPUT_MODE,
+        Settings.PREF_BRAHMIC_AYOGAVAHA_STRIP_VIRAMA,
+        Settings.PREF_BRAHMIC_NUKTA_PART_OF_CONSONANT,
+        Settings.PREF_BRAHMIC_VOWEL_LABELS,
         R.string.settings_category_additional_keys,
         Settings.PREF_SHOW_NUMBER_ROW,
         if (SubtypeSettings.getEnabledSubtypes(true).any { it.locale().language in localesWithLocalizedNumberRow })
@@ -127,6 +132,41 @@ fun createPreferencesSettings(context: Context) = listOf(
     },
     Setting(context, Settings.PREF_SHOW_EMOJI_DESCRIPTIONS, R.string.show_emoji_descriptions) {
         SwitchPreferenceWithEmojiDictWarning(it, Defaults.PREF_SHOW_EMOJI_DESCRIPTIONS)
+    },
+    Setting(context, Settings.PREF_BRAHMIC_INPUT_MODE, R.string.brahmic_mode, R.string.brahmic_mode_summary) {
+        ListPreference(
+            it,
+            listOf(
+                stringResource(R.string.brahmic_mode_glyphic) to 0,
+                stringResource(R.string.brahmic_mode_contextual) to 1,
+                stringResource(R.string.brahmic_mode_phonetic) to 2,
+            ),
+            Defaults.PREF_BRAHMIC_INPUT_MODE
+        ) {
+            helium314.keyboard.latin.brahmic.BrahmicUiState.setDependentVowels(false)
+            KeyboardSwitcher.getInstance().reloadKeyboard()
+        }
+    },
+    Setting(
+        context, Settings.PREF_BRAHMIC_AYOGAVAHA_STRIP_VIRAMA,
+        R.string.brahmic_ayogavaha_strip_virama, R.string.brahmic_ayogavaha_strip_virama_summary
+    ) {
+        SwitchPreference(it, Defaults.PREF_BRAHMIC_AYOGAVAHA_STRIP_VIRAMA)
+    },
+    Setting(
+        context, Settings.PREF_BRAHMIC_NUKTA_PART_OF_CONSONANT,
+        R.string.brahmic_nukta_part_of_consonant, R.string.brahmic_nukta_part_of_consonant_summary
+    ) {
+        SwitchPreference(it, Defaults.PREF_BRAHMIC_NUKTA_PART_OF_CONSONANT)
+    },
+    Setting(
+        context, Settings.PREF_BRAHMIC_VOWEL_LABELS,
+        R.string.brahmic_vowel_labels, R.string.brahmic_vowel_labels_summary
+    ) {
+        SwitchPreference(it, Defaults.PREF_BRAHMIC_VOWEL_LABELS) {
+            helium314.keyboard.latin.brahmic.BrahmicUiState.setDependentVowels(false)
+            KeyboardSwitcher.getInstance().reloadKeyboard()
+        }
     },
     Setting(context, Settings.PREF_SHOW_NUMBER_ROW, R.string.number_row, R.string.number_row_summary) {
         SwitchPreference(it, Defaults.PREF_SHOW_NUMBER_ROW) { KeyboardSwitcher.getInstance().setThemeNeedsReload() }

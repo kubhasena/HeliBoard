@@ -41,6 +41,7 @@ fun setToolbarButtonsActivatedStateOnPrefChange(buttonsGroup: ViewGroup, key: St
         && key != Settings.PREF_ALWAYS_INCOGNITO_MODE
         && key != GestureDataGatheringSettings.PREF_BACKGROUND_GATHERING_ENABLED
         && key != GestureDataGatheringSettings.PREF_BACKGROUND_DISABLED_BEFORE_TIME_MILLIS
+        && key != Settings.PREF_BRAHMIC_INPUT_MODE
         && key?.startsWith(Settings.PREF_ONE_HANDED_MODE_PREFIX) == false)
         return
 
@@ -57,6 +58,15 @@ private fun setToolbarButtonActivatedState(button: ImageButton) {
         SPLIT -> Settings.getValues().mIsSplitKeyboardEnabled
         AUTOCORRECT -> Settings.getValues().mAutoCorrectionEnabledPerUserSettings
         BACKGROUND_GATHERING -> useBackgroundGathering
+        BRAHMIC_MODE -> {
+            val mode = button.context.prefs().getInt(Settings.PREF_BRAHMIC_INPUT_MODE, Defaults.PREF_BRAHMIC_INPUT_MODE)
+            button.contentDescription = when (mode) {
+                1 -> button.context.getString(R.string.brahmic_mode_contextual)
+                2 -> button.context.getString(R.string.brahmic_mode_phonetic)
+                else -> button.context.getString(R.string.brahmic_mode_glyphic)
+            }
+            mode != 0
+        }
         else -> true
     }
 }
@@ -95,6 +105,7 @@ fun getCodeForToolbarKey(key: ToolbarKey) = Settings.getInstance().getCustomTool
     SPLIT -> KeyCode.SPLIT_LAYOUT
     FLOATING -> KeyCode.TOGGLE_FLOATING_WINDOW
     BACKGROUND_GATHERING -> KeyCode.BACKGROUND_GATHERING
+    BRAHMIC_MODE -> KeyCode.CYCLE_BRAHMIC_INPUT_MODE
 }
 
 fun getCodeForToolbarKeyLongClick(key: ToolbarKey) = Settings.getInstance().getCustomToolbarLongpressCode(key) ?: when (key) {
@@ -121,7 +132,7 @@ fun getCodeForToolbarKeyLongClick(key: ToolbarKey) = Settings.getInstance().getC
 enum class ToolbarKey {
     VOICE, CLIPBOARD, NUMPAD, DPAD, UNDO, REDO, SETTINGS, SELECT_ALL, SELECT_WORD, COPY, CUT, PASTE, ONE_HANDED, FLOATING, SPLIT,
     INCOGNITO, AUTOCORRECT, CLEAR_CLIPBOARD, CLOSE_HISTORY, EMOJI, LEFT, RIGHT, UP, DOWN, WORD_LEFT, WORD_RIGHT,
-    PAGE_UP, PAGE_DOWN, FULL_LEFT, FULL_RIGHT, PAGE_START, PAGE_END, BACKGROUND_GATHERING
+    PAGE_UP, PAGE_DOWN, FULL_LEFT, FULL_RIGHT, PAGE_START, PAGE_END, BACKGROUND_GATHERING, BRAHMIC_MODE
 }
 
 enum class ToolbarMode {

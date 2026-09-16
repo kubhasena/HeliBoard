@@ -22,6 +22,7 @@ import helium314.keyboard.latin.ShadowFacilitator2.Companion.lastAddedWord
 import helium314.keyboard.latin.SuggestedWords.SuggestedWordInfo
 import helium314.keyboard.latin.common.Constants
 import helium314.keyboard.latin.common.LocaleUtils.constructLocale
+import helium314.keyboard.latin.brahmic.BrahmicUiState
 import helium314.keyboard.latin.common.StringUtils
 import helium314.keyboard.latin.inputlogic.InputLogic
 import helium314.keyboard.latin.inputlogic.SpaceState
@@ -719,6 +720,123 @@ class InputLogicTest {
         assertEquals(5, cursor)
     }
 
+    @Test fun brahmicGlyphicIsUnchanged() {
+        setBrahmicMode(0)
+        input('क')
+        input('आ')
+        assertEquals("कआ", textBeforeCursor)
+        functionalKeyPress(KeyCode.DELETE)
+        assertEquals("क", textBeforeCursor)
+    }
+
+    @Test fun brahmicContextualVowelsWithComposing() {
+        setBrahmicMode(1)
+        input('क')
+        input('आ')
+        assertEquals("का", textBeforeCursor)
+        functionalKeyPress(KeyCode.DELETE)
+        assertEquals("क", textBeforeCursor)
+    }
+
+    @Test fun brahmicContextualVowelsWithoutComposing() {
+        setBrahmicMode(1)
+        setSuggestionsEnabled(false)
+        input('क')
+        input('आ')
+        assertEquals("का", textBeforeCursor)
+        assertEquals("", composingText)
+        functionalKeyPress(KeyCode.DELETE)
+        assertEquals("क", textBeforeCursor)
+    }
+
+    @Test fun brahmicPhoneticWithComposing() {
+        setBrahmicMode(2)
+        input('क')
+        assertEquals("क्", textBeforeCursor)
+        input('आ')
+        assertEquals("का", textBeforeCursor)
+        functionalKeyPress(KeyCode.DELETE)
+        assertEquals("क्", textBeforeCursor)
+        functionalKeyPress(KeyCode.DELETE)
+        assertEquals("", textBeforeCursor)
+        input('क')
+        input('अ')
+        assertEquals("क", textBeforeCursor)
+        functionalKeyPress(KeyCode.DELETE)
+        assertEquals("क्", textBeforeCursor)
+    }
+
+    @Test fun brahmicPhoneticWithoutComposing() {
+        setBrahmicMode(2)
+        setSuggestionsEnabled(false)
+        input('क')
+        assertEquals("क्", textBeforeCursor)
+        assertEquals("", composingText)
+        input('आ')
+        assertEquals("का", textBeforeCursor)
+        functionalKeyPress(KeyCode.DELETE)
+        assertEquals("क्", textBeforeCursor)
+        functionalKeyPress(KeyCode.DELETE)
+        assertEquals("", textBeforeCursor)
+    }
+
+    @Test fun brahmicPhoneticMultiTextLastConsonant() {
+        setBrahmicMode(2)
+        input("क्त")
+        assertEquals("क्त्", textBeforeCursor)
+    }
+
+    @Test fun brahmicPairedVowelKeyIsNotRewritten() {
+        setBrahmicMode(1)
+        setBrahmicPairedVowels(0x0906, 0x093E) // the layout has a key for both आ and ा
+        input('क')
+        input('आ')
+        assertEquals("कआ", textBeforeCursor)
+        input('ा')
+        assertEquals("कआा", textBeforeCursor)
+    }
+
+    @Test fun brahmicPairedMatraStillReplacesPhoneticVirama() {
+        setBrahmicMode(2)
+        setBrahmicPairedVowels(0x0906, 0x093E)
+        input('क')
+        assertEquals("क्", textBeforeCursor)
+        input('ा')
+        assertEquals("का", textBeforeCursor)
+    }
+
+    @Test fun brahmicMultiTextVowelTakesItsMarksAlong() {
+        setBrahmicMode(1)
+        input('क')
+        input("आं") // popup key of आ, an anusvara riding along
+        assertEquals("कां", textBeforeCursor)
+        input("आँ")
+        assertEquals("कांआँ", textBeforeCursor)
+    }
+
+    @Test fun brahmicMultiTextSyllableIsNotAVowelKey() {
+        setBrahmicMode(1)
+        input('क')
+        input("क्षा") // the matra belongs to क्ष, so nothing is rewritten
+        assertEquals("कक्षा", textBeforeCursor)
+    }
+
+    @Test fun brahmicPhoneticDecomposedNuktaGetsVirama() {
+        setBrahmicMode(2)
+        input("क़") // popup of क, combining nukta rather than precomposed क़
+        assertEquals("क़्", textBeforeCursor)
+        input("फ़")
+        assertEquals("क़्फ़्", textBeforeCursor)
+    }
+
+    @Test fun brahmicMultiTextIsNotCommittedTwice() {
+        setBrahmicMode(2)
+        input("क्त")
+        assertEquals("क्त्", textBeforeCursor)
+        input("क्त")
+        assertEquals("क्त्क्त्", textBeforeCursor)
+    }
+
     // ------- helper functions ---------
 
     // should be called before every test, so the same state is guaranteed
@@ -731,8 +849,24 @@ class InputLogicTest {
 
         // reset settings
         latinIME.prefs().edit { clear() }
+        BrahmicUiState.clearPairedVowels()
 
         setText("") // (re)sets selection and composing word
+    }
+
+    private fun setBrahmicMode(mode: Int) {
+        latinIME.prefs().edit { putInt(Settings.PREF_BRAHMIC_INPUT_MODE, mode) }
+    }
+
+    private fun setBrahmicPairedVowels(vararg codePoints: Int) {
+        BrahmicUiState.pairedVowels = codePoints.toSet()
+    }
+
+    private fun setSuggestionsEnabled(enabled: Boolean) {
+        latinIME.prefs().edit {
+            putBoolean(Settings.PREF_SHOW_SUGGESTIONS, enabled)
+            putBoolean(Settings.PREF_AUTO_CORRECTION, enabled)
+        }
     }
 
     private fun chainInput(text: String) = text.forEach { input(it.code) }
@@ -751,6 +885,7 @@ class InputLogicTest {
         handleMessages()
 
         if (!latinIME.prefs().getString(Settings.PREF_SELECTED_SUBTYPE, "")!!.contains("CombiningRules") // check fails if combiner merges symbols
+            && latinIME.prefs().getInt(Settings.PREF_BRAHMIC_INPUT_MODE, 0) == 0 // Brahmic rewrite changes inserted text
             && !(codePoint == Constants.CODE_SPACE && oldBefore.lastOrNull() == ' ') // check fails when 2 spaces are converted into a period
             && !latinIME.mInputLogic.mSuggestedWords.mWillAutoCorrect // autocorrect obviously creates inconsistencies
             ) {
@@ -782,11 +917,13 @@ class InputLogicTest {
         latinIME.onTextInput(insert)
         handleMessages()
 
-        if (phantomSpaceToInsert.isEmpty())
-            assertEquals(oldBefore + insert, textBeforeCursor)
-        else // in some cases autospace might be suppressed
-            assert(oldBefore + phantomSpaceToInsert + insert == textBeforeCursor || oldBefore + insert == textBeforeCursor)
-        assert(oldBefore + insert == textBeforeCursor || "$oldBefore $insert" == textBeforeCursor)
+        if (latinIME.prefs().getInt(Settings.PREF_BRAHMIC_INPUT_MODE, 0) == 0) {
+            if (phantomSpaceToInsert.isEmpty())
+                assertEquals(oldBefore + insert, textBeforeCursor)
+            else // in some cases autospace might be suppressed
+                assert(oldBefore + phantomSpaceToInsert + insert == textBeforeCursor || oldBefore + insert == textBeforeCursor)
+            assert(oldBefore + insert == textBeforeCursor || "$oldBefore $insert" == textBeforeCursor)
+        }
         assertEquals(oldAfter, textAfterCursor)
         assertEquals(textBeforeCursor + textAfterCursor, getTextFromConnection())
         checkConnectionConsistency()

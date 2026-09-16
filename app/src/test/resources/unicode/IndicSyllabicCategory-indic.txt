@@ -1,0 +1,437 @@
+# IndicSyllabicCategory-17.0.0.txt
+# Date: 2025-08-01, 04:02:23 GMT
+# © 2025 Unicode®, Inc.
+# Unicode and the Unicode Logo are registered trademarks of Unicode, Inc. in the U.S. and other countries.
+# For terms of use and license, see https://www.unicode.org/terms_of_use.html
+#
+# Unicode Character Database
+#   For documentation, see https://www.unicode.org/reports/tr44/
+#
+# This file defines the following property:
+#
+#    Indic_Syllabic_Category     enumerated property
+#
+# Scope: This property is aimed at two general problem
+# areas involving the analysis and processing of Indic scripts:
+#
+#   1. Specification of syllabic structure.
+#   2. Specification of segmentation rules.
+#
+# Both of these problem areas may benefit from having defined subtypes
+# of Indic script characters which are relevant to how Indic
+# syllables (or aksaras) are constructed. Note that rules for
+# syllabic structure in Indic scripts may differ significantly
+# from how phonological syllables are defined.
+#
+# Format:
+#    Field 0  Unicode code point value or range of code point values
+#    Field 1  Indic_Syllabic_Category property value
+#
+# Field 1 is followed by a comment field, starting with the number sign '#',
+# which shows the General_Category property value, the Unicode character name
+# or names, and, in lines with ranges of code points, the code point count in
+# square brackets.
+#
+# The scripts assessed as Indic in the structural sense used for the
+# Indic_Syllabic_Category are the following:
+#
+# Ahom, Balinese, Batak, Bengali, Bhaiksuki, Brahmi, Buginese, Buhid,
+# Chakma, Cham, Devanagari, Dives Akuru, Dogra, Grantha, Gujarati,
+# Gunjala Gondi, Gurmukhi, Gurung Khema, Hanunoo, Javanese, Kaithi,
+# Kannada, Kawi, Kayah Li, Kharoshthi, Khmer, Khojki, Khudawadi,
+# Kirat Rai, Lao, Lepcha, Limbu, Mahajani, Makasar, Malayalam,
+# Marchen, Masaram Gondi, Meetei Mayek, Modi, Multani, Myanmar,
+# Nandinagari, Newa, New Tai Lue, Oriya, Phags-pa, Rejang,
+# Saurashtra, Sharada, Siddham, Sinhala, Soyombo, Sundanese,
+# Syloti Nagri, Tagalog, Tagbanwa, Tai Le, Tai Tham, Tai Viet, Takri,
+# Tamil, Telugu, Thai, Tibetan, Tirhuta, Tulu-Tigalari, and
+# Zanabazar Square.
+#
+# All characters for all other scripts not in that list
+# take the default value for this property, unless they
+# are individually listed in this data file.
+#
+
+# ================================================
+
+# Property: Indic_Syllabic_Category
+#
+#  All code points not explicitly listed for Indic_Syllabic_Category
+#  have the value Other.
+#
+# @missing: 0000..10FFFF; Other
+
+# ================================================
+
+# Indic_Syllabic_Category=Bindu
+
+# Bindu/Anusvara (nasalization or -n)
+
+# [Not derivable]
+
+0900..0902    ; Bindu # Mn   [3] DEVANAGARI SIGN INVERTED CANDRABINDU..DEVANAGARI SIGN ANUSVARA
+0900..0902 ; Bindu # Mn   [3] DEVANAGARI SIGN INVERTED CANDRABINDU..DEVANAGARI SIGN ANUSVARA
+0981 ; Bindu # Mn       BENGALI SIGN CANDRABINDU
+0982 ; Bindu # Mc       BENGALI SIGN ANUSVARA
+09FC ; Bindu # Lo       BENGALI LETTER VEDIC ANUSVARA
+0A01..0A02 ; Bindu # Mn   [2] GURMUKHI SIGN ADAK BINDI..GURMUKHI SIGN BINDI
+0A70 ; Bindu # Mn       GURMUKHI TIPPI
+0A81..0A82 ; Bindu # Mn   [2] GUJARATI SIGN CANDRABINDU..GUJARATI SIGN ANUSVARA
+0B01 ; Bindu # Mn       ORIYA SIGN CANDRABINDU
+0B02 ; Bindu # Mc       ORIYA SIGN ANUSVARA
+0B82 ; Bindu # Mn       TAMIL SIGN ANUSVARA
+0C00 ; Bindu # Mn       TELUGU SIGN COMBINING CANDRABINDU ABOVE
+0C01..0C02 ; Bindu # Mc   [2] TELUGU SIGN CANDRABINDU..TELUGU SIGN ANUSVARA
+0C04 ; Bindu # Mn       TELUGU SIGN COMBINING ANUSVARA ABOVE
+0C80 ; Bindu # Lo       KANNADA SIGN SPACING CANDRABINDU
+0C81 ; Bindu # Mn       KANNADA SIGN CANDRABINDU
+0C82 ; Bindu # Mc       KANNADA SIGN ANUSVARA
+0CF3 ; Bindu # Mc       KANNADA SIGN COMBINING ANUSVARA ABOVE RIGHT
+0D00..0D01 ; Bindu # Mn   [2] MALAYALAM SIGN COMBINING ANUSVARA ABOVE..MALAYALAM SIGN CANDRABINDU
+0D02 ; Bindu # Mc       MALAYALAM SIGN ANUSVARA
+0D04 ; Bindu # Lo       MALAYALAM LETTER VEDIC ANUSVARA
+A8F2..A8F3 ; Bindu # Lo   [2] DEVANAGARI SIGN SPACING CANDRABINDU..DEVANAGARI SIGN CANDRABINDU VIRAMA
+11000 ; Bindu # Mc       BRAHMI SIGN CANDRABINDU
+11001 ; Bindu # Mn       BRAHMI SIGN ANUSVARA
+11180..11181 ; Bindu # Mn   [2] SHARADA SIGN CANDRABINDU..SHARADA SIGN ANUSVARA
+111CF ; Bindu # Mn       SHARADA SIGN INVERTED CANDRABINDU
+11300..11301 ; Bindu # Mn   [2] GRANTHA SIGN COMBINING ANUSVARA ABOVE..GRANTHA SIGN CANDRABINDU
+11302 ; Bindu # Mc       GRANTHA SIGN ANUSVARA
+1135E..1135F ; Bindu # Lo   [2] GRANTHA LETTER VEDIC ANUSVARA..GRANTHA LETTER VEDIC DOUBLE ANUSVARA
+113CA ; Bindu # Mc       TULU-TIGALARI SIGN CANDRA ANUNASIKA
+113CC ; Bindu # Mc       TULU-TIGALARI SIGN ANUSVARA
+116AB ; Bindu # Mn       TAKRI SIGN ANUSVARA
+11837 ; Bindu # Mn       DOGRA SIGN ANUSVARA
+# Indic_Syllabic_Category=Visarga
+0903 ; Visarga # Mc       DEVANAGARI SIGN VISARGA
+0983 ; Visarga # Mc       BENGALI SIGN VISARGA
+0A03 ; Visarga # Mc       GURMUKHI SIGN VISARGA
+0A83 ; Visarga # Mc       GUJARATI SIGN VISARGA
+0B03 ; Visarga # Mc       ORIYA SIGN VISARGA
+0C03 ; Visarga # Mc       TELUGU SIGN VISARGA
+0C83 ; Visarga # Mc       KANNADA SIGN VISARGA
+0D03 ; Visarga # Mc       MALAYALAM SIGN VISARGA
+11002 ; Visarga # Mc       BRAHMI SIGN VISARGA
+11182 ; Visarga # Mc       SHARADA SIGN VISARGA
+11303 ; Visarga # Mc       GRANTHA SIGN VISARGA
+113CD ; Visarga # Mc       TULU-TIGALARI SIGN VISARGA
+116AC ; Visarga # Mc       TAKRI SIGN VISARGA
+11838 ; Visarga # Mc       DOGRA SIGN VISARGA
+# Indic_Syllabic_Category=Avagraha
+093D ; Avagraha # Lo       DEVANAGARI SIGN AVAGRAHA
+09BD ; Avagraha # Lo       BENGALI SIGN AVAGRAHA
+0ABD ; Avagraha # Lo       GUJARATI SIGN AVAGRAHA
+0B3D ; Avagraha # Lo       ORIYA SIGN AVAGRAHA
+0C3D ; Avagraha # Lo       TELUGU SIGN AVAGRAHA
+0CBD ; Avagraha # Lo       KANNADA SIGN AVAGRAHA
+0D3D ; Avagraha # Lo       MALAYALAM SIGN AVAGRAHA
+111C1 ; Avagraha # Lo       SHARADA SIGN AVAGRAHA
+1133D ; Avagraha # Lo       GRANTHA SIGN AVAGRAHA
+113B7 ; Avagraha # Lo       TULU-TIGALARI SIGN AVAGRAHA
+# Indic_Syllabic_Category=Nukta
+093C ; Nukta # Mn       DEVANAGARI SIGN NUKTA
+09BC ; Nukta # Mn       BENGALI SIGN NUKTA
+0A3C ; Nukta # Mn       GURMUKHI SIGN NUKTA
+0ABC ; Nukta # Mn       GUJARATI SIGN NUKTA
+0AFD..0AFF ; Nukta # Mn   [3] GUJARATI SIGN THREE-DOT NUKTA ABOVE..GUJARATI SIGN TWO-CIRCLE NUKTA ABOVE
+0B3C ; Nukta # Mn       ORIYA SIGN NUKTA
+0C3C ; Nukta # Mn       TELUGU SIGN NUKTA
+0CBC ; Nukta # Mn       KANNADA SIGN NUKTA
+111CA ; Nukta # Mn       SHARADA SIGN NUKTA
+1133B..1133C ; Nukta # Mn   [2] COMBINING BINDU BELOW..GRANTHA SIGN NUKTA
+116B7 ; Nukta # Mn       TAKRI SIGN NUKTA
+1183A ; Nukta # Mn       DOGRA SIGN NUKTA
+# Indic_Syllabic_Category=Virama
+094D ; Virama # Mn       DEVANAGARI SIGN VIRAMA
+09CD ; Virama # Mn       BENGALI SIGN VIRAMA
+0A4D ; Virama # Mn       GURMUKHI SIGN VIRAMA
+0ACD ; Virama # Mn       GUJARATI SIGN VIRAMA
+0B4D ; Virama # Mn       ORIYA SIGN VIRAMA
+0BCD ; Virama # Mn       TAMIL SIGN VIRAMA
+0C4D ; Virama # Mn       TELUGU SIGN VIRAMA
+0CCD ; Virama # Mn       KANNADA SIGN VIRAMA
+0D4D ; Virama # Mn       MALAYALAM SIGN VIRAMA
+11046 ; Virama # Mn       BRAHMI VIRAMA
+111C0 ; Virama # Mc       SHARADA SIGN VIRAMA
+1134D ; Virama # Mc       GRANTHA SIGN VIRAMA
+116B6 ; Virama # Mc       TAKRI SIGN VIRAMA
+11839 ; Virama # Mn       DOGRA SIGN VIRAMA
+# Indic_Syllabic_Category=Pure_Killer
+0D3B..0D3C ; Pure_Killer # Mn   [2] MALAYALAM SIGN VERTICAL BAR VIRAMA..MALAYALAM SIGN CIRCULAR VIRAMA
+11070 ; Pure_Killer # Mn       BRAHMI SIGN OLD TAMIL VIRAMA
+113CE ; Pure_Killer # Mn       TULU-TIGALARI SIGN VIRAMA
+113CF ; Pure_Killer # Mc       TULU-TIGALARI SIGN LOOPED VIRAMA
+# Indic_Syllabic_Category=Reordering_Killer
+# Indic_Syllabic_Category=Invisible_Stacker
+113D0 ; Invisible_Stacker # Mn       TULU-TIGALARI CONJOINER
+# Indic_Syllabic_Category=Vowel_Independent
+0904..0914 ; Vowel_Independent # Lo  [17] DEVANAGARI LETTER SHORT A..DEVANAGARI LETTER AU
+0960..0961 ; Vowel_Independent # Lo   [2] DEVANAGARI LETTER VOCALIC RR..DEVANAGARI LETTER VOCALIC LL
+0972..0977 ; Vowel_Independent # Lo   [6] DEVANAGARI LETTER CANDRA A..DEVANAGARI LETTER UUE
+0985..098C ; Vowel_Independent # Lo   [8] BENGALI LETTER A..BENGALI LETTER VOCALIC L
+098F..0990 ; Vowel_Independent # Lo   [2] BENGALI LETTER E..BENGALI LETTER AI
+0993..0994 ; Vowel_Independent # Lo   [2] BENGALI LETTER O..BENGALI LETTER AU
+09E0..09E1 ; Vowel_Independent # Lo   [2] BENGALI LETTER VOCALIC RR..BENGALI LETTER VOCALIC LL
+0A05..0A0A ; Vowel_Independent # Lo   [6] GURMUKHI LETTER A..GURMUKHI LETTER UU
+0A0F..0A10 ; Vowel_Independent # Lo   [2] GURMUKHI LETTER EE..GURMUKHI LETTER AI
+0A13..0A14 ; Vowel_Independent # Lo   [2] GURMUKHI LETTER OO..GURMUKHI LETTER AU
+0A85..0A8D ; Vowel_Independent # Lo   [9] GUJARATI LETTER A..GUJARATI VOWEL CANDRA E
+0A8F..0A91 ; Vowel_Independent # Lo   [3] GUJARATI LETTER E..GUJARATI VOWEL CANDRA O
+0A93..0A94 ; Vowel_Independent # Lo   [2] GUJARATI LETTER O..GUJARATI LETTER AU
+0AE0..0AE1 ; Vowel_Independent # Lo   [2] GUJARATI LETTER VOCALIC RR..GUJARATI LETTER VOCALIC LL
+0B05..0B0C ; Vowel_Independent # Lo   [8] ORIYA LETTER A..ORIYA LETTER VOCALIC L
+0B0F..0B10 ; Vowel_Independent # Lo   [2] ORIYA LETTER E..ORIYA LETTER AI
+0B13..0B14 ; Vowel_Independent # Lo   [2] ORIYA LETTER O..ORIYA LETTER AU
+0B60..0B61 ; Vowel_Independent # Lo   [2] ORIYA LETTER VOCALIC RR..ORIYA LETTER VOCALIC LL
+0B85..0B8A ; Vowel_Independent # Lo   [6] TAMIL LETTER A..TAMIL LETTER UU
+0B8E..0B90 ; Vowel_Independent # Lo   [3] TAMIL LETTER E..TAMIL LETTER AI
+0B92..0B94 ; Vowel_Independent # Lo   [3] TAMIL LETTER O..TAMIL LETTER AU
+0C05..0C0C ; Vowel_Independent # Lo   [8] TELUGU LETTER A..TELUGU LETTER VOCALIC L
+0C0E..0C10 ; Vowel_Independent # Lo   [3] TELUGU LETTER E..TELUGU LETTER AI
+0C12..0C14 ; Vowel_Independent # Lo   [3] TELUGU LETTER O..TELUGU LETTER AU
+0C60..0C61 ; Vowel_Independent # Lo   [2] TELUGU LETTER VOCALIC RR..TELUGU LETTER VOCALIC LL
+0C85..0C8C ; Vowel_Independent # Lo   [8] KANNADA LETTER A..KANNADA LETTER VOCALIC L
+0C8E..0C90 ; Vowel_Independent # Lo   [3] KANNADA LETTER E..KANNADA LETTER AI
+0C92..0C94 ; Vowel_Independent # Lo   [3] KANNADA LETTER O..KANNADA LETTER AU
+0CE0..0CE1 ; Vowel_Independent # Lo   [2] KANNADA LETTER VOCALIC RR..KANNADA LETTER VOCALIC LL
+0D05..0D0C ; Vowel_Independent # Lo   [8] MALAYALAM LETTER A..MALAYALAM LETTER VOCALIC L
+0D0E..0D10 ; Vowel_Independent # Lo   [3] MALAYALAM LETTER E..MALAYALAM LETTER AI
+0D12..0D14 ; Vowel_Independent # Lo   [3] MALAYALAM LETTER O..MALAYALAM LETTER AU
+0D5F..0D61 ; Vowel_Independent # Lo   [3] MALAYALAM LETTER ARCHAIC II..MALAYALAM LETTER VOCALIC LL
+A8FE ; Vowel_Independent # Lo       DEVANAGARI LETTER AY
+11005..11012 ; Vowel_Independent # Lo  [14] BRAHMI LETTER A..BRAHMI LETTER AU
+11071..11072 ; Vowel_Independent # Lo   [2] BRAHMI LETTER OLD TAMIL SHORT E..BRAHMI LETTER OLD TAMIL SHORT O
+11183..11190 ; Vowel_Independent # Lo  [14] SHARADA LETTER A..SHARADA LETTER AU
+11305..1130C ; Vowel_Independent # Lo   [8] GRANTHA LETTER A..GRANTHA LETTER VOCALIC L
+1130F..11310 ; Vowel_Independent # Lo   [2] GRANTHA LETTER EE..GRANTHA LETTER AI
+11313..11314 ; Vowel_Independent # Lo   [2] GRANTHA LETTER OO..GRANTHA LETTER AU
+11360..11361 ; Vowel_Independent # Lo   [2] GRANTHA LETTER VOCALIC RR..GRANTHA LETTER VOCALIC LL
+11380..11389 ; Vowel_Independent # Lo  [10] TULU-TIGALARI LETTER A..TULU-TIGALARI LETTER VOCALIC LL
+1138B ; Vowel_Independent # Lo       TULU-TIGALARI LETTER EE
+1138E ; Vowel_Independent # Lo       TULU-TIGALARI LETTER AI
+11390..11391 ; Vowel_Independent # Lo   [2] TULU-TIGALARI LETTER OO..TULU-TIGALARI LETTER AU
+11680..11689 ; Vowel_Independent # Lo  [10] TAKRI LETTER A..TAKRI LETTER AU
+11800..11809 ; Vowel_Independent # Lo  [10] DOGRA LETTER A..DOGRA LETTER AU
+# Indic_Syllabic_Category=Vowel_Dependent
+093A ; Vowel_Dependent # Mn       DEVANAGARI VOWEL SIGN OE
+093B ; Vowel_Dependent # Mc       DEVANAGARI VOWEL SIGN OOE
+093E..0940 ; Vowel_Dependent # Mc   [3] DEVANAGARI VOWEL SIGN AA..DEVANAGARI VOWEL SIGN II
+0941..0948 ; Vowel_Dependent # Mn   [8] DEVANAGARI VOWEL SIGN U..DEVANAGARI VOWEL SIGN AI
+0949..094C ; Vowel_Dependent # Mc   [4] DEVANAGARI VOWEL SIGN CANDRA O..DEVANAGARI VOWEL SIGN AU
+094E..094F ; Vowel_Dependent # Mc   [2] DEVANAGARI VOWEL SIGN PRISHTHAMATRA E..DEVANAGARI VOWEL SIGN AW
+0955..0957 ; Vowel_Dependent # Mn   [3] DEVANAGARI VOWEL SIGN CANDRA LONG E..DEVANAGARI VOWEL SIGN UUE
+0962..0963 ; Vowel_Dependent # Mn   [2] DEVANAGARI VOWEL SIGN VOCALIC L..DEVANAGARI VOWEL SIGN VOCALIC LL
+09BE..09C0 ; Vowel_Dependent # Mc   [3] BENGALI VOWEL SIGN AA..BENGALI VOWEL SIGN II
+09C1..09C4 ; Vowel_Dependent # Mn   [4] BENGALI VOWEL SIGN U..BENGALI VOWEL SIGN VOCALIC RR
+09C7..09C8 ; Vowel_Dependent # Mc   [2] BENGALI VOWEL SIGN E..BENGALI VOWEL SIGN AI
+09CB..09CC ; Vowel_Dependent # Mc   [2] BENGALI VOWEL SIGN O..BENGALI VOWEL SIGN AU
+09D7 ; Vowel_Dependent # Mc       BENGALI AU LENGTH MARK
+09E2..09E3 ; Vowel_Dependent # Mn   [2] BENGALI VOWEL SIGN VOCALIC L..BENGALI VOWEL SIGN VOCALIC LL
+0A3E..0A40 ; Vowel_Dependent # Mc   [3] GURMUKHI VOWEL SIGN AA..GURMUKHI VOWEL SIGN II
+0A41..0A42 ; Vowel_Dependent # Mn   [2] GURMUKHI VOWEL SIGN U..GURMUKHI VOWEL SIGN UU
+0A47..0A48 ; Vowel_Dependent # Mn   [2] GURMUKHI VOWEL SIGN EE..GURMUKHI VOWEL SIGN AI
+0A4B..0A4C ; Vowel_Dependent # Mn   [2] GURMUKHI VOWEL SIGN OO..GURMUKHI VOWEL SIGN AU
+0ABE..0AC0 ; Vowel_Dependent # Mc   [3] GUJARATI VOWEL SIGN AA..GUJARATI VOWEL SIGN II
+0AC1..0AC5 ; Vowel_Dependent # Mn   [5] GUJARATI VOWEL SIGN U..GUJARATI VOWEL SIGN CANDRA E
+0AC7..0AC8 ; Vowel_Dependent # Mn   [2] GUJARATI VOWEL SIGN E..GUJARATI VOWEL SIGN AI
+0AC9 ; Vowel_Dependent # Mc       GUJARATI VOWEL SIGN CANDRA O
+0ACB..0ACC ; Vowel_Dependent # Mc   [2] GUJARATI VOWEL SIGN O..GUJARATI VOWEL SIGN AU
+0AE2..0AE3 ; Vowel_Dependent # Mn   [2] GUJARATI VOWEL SIGN VOCALIC L..GUJARATI VOWEL SIGN VOCALIC LL
+0B3E ; Vowel_Dependent # Mc       ORIYA VOWEL SIGN AA
+0B3F ; Vowel_Dependent # Mn       ORIYA VOWEL SIGN I
+0B40 ; Vowel_Dependent # Mc       ORIYA VOWEL SIGN II
+0B41..0B44 ; Vowel_Dependent # Mn   [4] ORIYA VOWEL SIGN U..ORIYA VOWEL SIGN VOCALIC RR
+0B47..0B48 ; Vowel_Dependent # Mc   [2] ORIYA VOWEL SIGN E..ORIYA VOWEL SIGN AI
+0B4B..0B4C ; Vowel_Dependent # Mc   [2] ORIYA VOWEL SIGN O..ORIYA VOWEL SIGN AU
+0B55..0B56 ; Vowel_Dependent # Mn   [2] ORIYA SIGN OVERLINE..ORIYA AI LENGTH MARK
+0B57 ; Vowel_Dependent # Mc       ORIYA AU LENGTH MARK
+0B62..0B63 ; Vowel_Dependent # Mn   [2] ORIYA VOWEL SIGN VOCALIC L..ORIYA VOWEL SIGN VOCALIC LL
+0BBE..0BBF ; Vowel_Dependent # Mc   [2] TAMIL VOWEL SIGN AA..TAMIL VOWEL SIGN I
+0BC0 ; Vowel_Dependent # Mn       TAMIL VOWEL SIGN II
+0BC1..0BC2 ; Vowel_Dependent # Mc   [2] TAMIL VOWEL SIGN U..TAMIL VOWEL SIGN UU
+0BC6..0BC8 ; Vowel_Dependent # Mc   [3] TAMIL VOWEL SIGN E..TAMIL VOWEL SIGN AI
+0BCA..0BCC ; Vowel_Dependent # Mc   [3] TAMIL VOWEL SIGN O..TAMIL VOWEL SIGN AU
+0BD7 ; Vowel_Dependent # Mc       TAMIL AU LENGTH MARK
+0C3E..0C40 ; Vowel_Dependent # Mn   [3] TELUGU VOWEL SIGN AA..TELUGU VOWEL SIGN II
+0C41..0C44 ; Vowel_Dependent # Mc   [4] TELUGU VOWEL SIGN U..TELUGU VOWEL SIGN VOCALIC RR
+0C46..0C48 ; Vowel_Dependent # Mn   [3] TELUGU VOWEL SIGN E..TELUGU VOWEL SIGN AI
+0C4A..0C4C ; Vowel_Dependent # Mn   [3] TELUGU VOWEL SIGN O..TELUGU VOWEL SIGN AU
+0C55..0C56 ; Vowel_Dependent # Mn   [2] TELUGU LENGTH MARK..TELUGU AI LENGTH MARK
+0C62..0C63 ; Vowel_Dependent # Mn   [2] TELUGU VOWEL SIGN VOCALIC L..TELUGU VOWEL SIGN VOCALIC LL
+0CBE ; Vowel_Dependent # Mc       KANNADA VOWEL SIGN AA
+0CBF ; Vowel_Dependent # Mn       KANNADA VOWEL SIGN I
+0CC0..0CC4 ; Vowel_Dependent # Mc   [5] KANNADA VOWEL SIGN II..KANNADA VOWEL SIGN VOCALIC RR
+0CC6 ; Vowel_Dependent # Mn       KANNADA VOWEL SIGN E
+0CC7..0CC8 ; Vowel_Dependent # Mc   [2] KANNADA VOWEL SIGN EE..KANNADA VOWEL SIGN AI
+0CCA..0CCB ; Vowel_Dependent # Mc   [2] KANNADA VOWEL SIGN O..KANNADA VOWEL SIGN OO
+0CCC ; Vowel_Dependent # Mn       KANNADA VOWEL SIGN AU
+0CD5..0CD6 ; Vowel_Dependent # Mc   [2] KANNADA LENGTH MARK..KANNADA AI LENGTH MARK
+0CE2..0CE3 ; Vowel_Dependent # Mn   [2] KANNADA VOWEL SIGN VOCALIC L..KANNADA VOWEL SIGN VOCALIC LL
+0D3E..0D40 ; Vowel_Dependent # Mc   [3] MALAYALAM VOWEL SIGN AA..MALAYALAM VOWEL SIGN II
+0D41..0D44 ; Vowel_Dependent # Mn   [4] MALAYALAM VOWEL SIGN U..MALAYALAM VOWEL SIGN VOCALIC RR
+0D46..0D48 ; Vowel_Dependent # Mc   [3] MALAYALAM VOWEL SIGN E..MALAYALAM VOWEL SIGN AI
+0D4A..0D4C ; Vowel_Dependent # Mc   [3] MALAYALAM VOWEL SIGN O..MALAYALAM VOWEL SIGN AU
+0D57 ; Vowel_Dependent # Mc       MALAYALAM AU LENGTH MARK
+0D62..0D63 ; Vowel_Dependent # Mn   [2] MALAYALAM VOWEL SIGN VOCALIC L..MALAYALAM VOWEL SIGN VOCALIC LL
+A8FF ; Vowel_Dependent # Mn       DEVANAGARI VOWEL SIGN AY
+11038..11045 ; Vowel_Dependent # Mn  [14] BRAHMI VOWEL SIGN AA..BRAHMI VOWEL SIGN AU
+11073..11074 ; Vowel_Dependent # Mn   [2] BRAHMI VOWEL SIGN OLD TAMIL SHORT E..BRAHMI VOWEL SIGN OLD TAMIL SHORT O
+111B3..111B5 ; Vowel_Dependent # Mc   [3] SHARADA VOWEL SIGN AA..SHARADA VOWEL SIGN II
+111B6..111BE ; Vowel_Dependent # Mn   [9] SHARADA VOWEL SIGN U..SHARADA VOWEL SIGN O
+111BF ; Vowel_Dependent # Mc       SHARADA VOWEL SIGN AU
+111CB..111CC ; Vowel_Dependent # Mn   [2] SHARADA VOWEL MODIFIER MARK..SHARADA EXTRA SHORT VOWEL MARK
+111CE ; Vowel_Dependent # Mc       SHARADA VOWEL SIGN PRISHTHAMATRA E
+1133E..1133F ; Vowel_Dependent # Mc   [2] GRANTHA VOWEL SIGN AA..GRANTHA VOWEL SIGN I
+11340 ; Vowel_Dependent # Mn       GRANTHA VOWEL SIGN II
+11341..11344 ; Vowel_Dependent # Mc   [4] GRANTHA VOWEL SIGN U..GRANTHA VOWEL SIGN VOCALIC RR
+11347..11348 ; Vowel_Dependent # Mc   [2] GRANTHA VOWEL SIGN EE..GRANTHA VOWEL SIGN AI
+1134B..1134C ; Vowel_Dependent # Mc   [2] GRANTHA VOWEL SIGN OO..GRANTHA VOWEL SIGN AU
+11357 ; Vowel_Dependent # Mc       GRANTHA AU LENGTH MARK
+11362..11363 ; Vowel_Dependent # Mc   [2] GRANTHA VOWEL SIGN VOCALIC L..GRANTHA VOWEL SIGN VOCALIC LL
+113B8..113BA ; Vowel_Dependent # Mc   [3] TULU-TIGALARI VOWEL SIGN AA..TULU-TIGALARI VOWEL SIGN II
+113BB..113C0 ; Vowel_Dependent # Mn   [6] TULU-TIGALARI VOWEL SIGN U..TULU-TIGALARI VOWEL SIGN VOCALIC LL
+113C2 ; Vowel_Dependent # Mc       TULU-TIGALARI VOWEL SIGN EE
+113C5 ; Vowel_Dependent # Mc       TULU-TIGALARI VOWEL SIGN AI
+113C7..113C9 ; Vowel_Dependent # Mc   [3] TULU-TIGALARI VOWEL SIGN OO..TULU-TIGALARI AU LENGTH MARK
+116AD ; Vowel_Dependent # Mn       TAKRI VOWEL SIGN AA
+116AE..116AF ; Vowel_Dependent # Mc   [2] TAKRI VOWEL SIGN I..TAKRI VOWEL SIGN II
+116B0..116B5 ; Vowel_Dependent # Mn   [6] TAKRI VOWEL SIGN U..TAKRI VOWEL SIGN AU
+1182C..1182E ; Vowel_Dependent # Mc   [3] DOGRA VOWEL SIGN AA..DOGRA VOWEL SIGN II
+1182F..11836 ; Vowel_Dependent # Mn   [8] DOGRA VOWEL SIGN U..DOGRA VOWEL SIGN AU
+11B60 ; Vowel_Dependent # Mn       SHARADA VOWEL SIGN OE
+11B61 ; Vowel_Dependent # Mc       SHARADA VOWEL SIGN OOE
+11B62..11B64 ; Vowel_Dependent # Mn   [3] SHARADA VOWEL SIGN UE..SHARADA VOWEL SIGN SHORT E
+11B65 ; Vowel_Dependent # Mc       SHARADA VOWEL SIGN SHORT O
+11B66 ; Vowel_Dependent # Mn       SHARADA VOWEL SIGN CANDRA E
+11B67 ; Vowel_Dependent # Mc       SHARADA VOWEL SIGN CANDRA O
+# Indic_Syllabic_Category=Vowel
+# Indic_Syllabic_Category=Consonant_Placeholder
+0980 ; Consonant_Placeholder # Lo       BENGALI ANJI
+0A72..0A73 ; Consonant_Placeholder # Lo   [2] GURMUKHI IRI..GURMUKHI URA
+1CFA ; Consonant_Placeholder # Lo       VEDIC SIGN DOUBLE ANUSVARA ANTARGOMUKHA
+# Indic_Syllabic_Category=Consonant
+0915..0939 ; Consonant # Lo  [37] DEVANAGARI LETTER KA..DEVANAGARI LETTER HA
+0958..095F ; Consonant # Lo   [8] DEVANAGARI LETTER QA..DEVANAGARI LETTER YYA
+0978..097F ; Consonant # Lo   [8] DEVANAGARI LETTER MARWARI DDA..DEVANAGARI LETTER BBA
+0995..09A8 ; Consonant # Lo  [20] BENGALI LETTER KA..BENGALI LETTER NA
+09AA..09B0 ; Consonant # Lo   [7] BENGALI LETTER PA..BENGALI LETTER RA
+09B2 ; Consonant # Lo       BENGALI LETTER LA
+09B6..09B9 ; Consonant # Lo   [4] BENGALI LETTER SHA..BENGALI LETTER HA
+09DC..09DD ; Consonant # Lo   [2] BENGALI LETTER RRA..BENGALI LETTER RHA
+09DF ; Consonant # Lo       BENGALI LETTER YYA
+09F0..09F1 ; Consonant # Lo   [2] BENGALI LETTER RA WITH MIDDLE DIAGONAL..BENGALI LETTER RA WITH LOWER DIAGONAL
+0A15..0A28 ; Consonant # Lo  [20] GURMUKHI LETTER KA..GURMUKHI LETTER NA
+0A2A..0A30 ; Consonant # Lo   [7] GURMUKHI LETTER PA..GURMUKHI LETTER RA
+0A32..0A33 ; Consonant # Lo   [2] GURMUKHI LETTER LA..GURMUKHI LETTER LLA
+0A35..0A36 ; Consonant # Lo   [2] GURMUKHI LETTER VA..GURMUKHI LETTER SHA
+0A38..0A39 ; Consonant # Lo   [2] GURMUKHI LETTER SA..GURMUKHI LETTER HA
+0A59..0A5C ; Consonant # Lo   [4] GURMUKHI LETTER KHHA..GURMUKHI LETTER RRA
+0A5E ; Consonant # Lo       GURMUKHI LETTER FA
+0A95..0AA8 ; Consonant # Lo  [20] GUJARATI LETTER KA..GUJARATI LETTER NA
+0AAA..0AB0 ; Consonant # Lo   [7] GUJARATI LETTER PA..GUJARATI LETTER RA
+0AB2..0AB3 ; Consonant # Lo   [2] GUJARATI LETTER LA..GUJARATI LETTER LLA
+0AB5..0AB9 ; Consonant # Lo   [5] GUJARATI LETTER VA..GUJARATI LETTER HA
+0AF9 ; Consonant # Lo       GUJARATI LETTER ZHA
+0B15..0B28 ; Consonant # Lo  [20] ORIYA LETTER KA..ORIYA LETTER NA
+0B2A..0B30 ; Consonant # Lo   [7] ORIYA LETTER PA..ORIYA LETTER RA
+0B32..0B33 ; Consonant # Lo   [2] ORIYA LETTER LA..ORIYA LETTER LLA
+0B35..0B39 ; Consonant # Lo   [5] ORIYA LETTER VA..ORIYA LETTER HA
+0B5C..0B5D ; Consonant # Lo   [2] ORIYA LETTER RRA..ORIYA LETTER RHA
+0B5F ; Consonant # Lo       ORIYA LETTER YYA
+0B71 ; Consonant # Lo       ORIYA LETTER WA
+0B95 ; Consonant # Lo       TAMIL LETTER KA
+0B99..0B9A ; Consonant # Lo   [2] TAMIL LETTER NGA..TAMIL LETTER CA
+0B9C ; Consonant # Lo       TAMIL LETTER JA
+0B9E..0B9F ; Consonant # Lo   [2] TAMIL LETTER NYA..TAMIL LETTER TTA
+0BA3..0BA4 ; Consonant # Lo   [2] TAMIL LETTER NNA..TAMIL LETTER TA
+0BA8..0BAA ; Consonant # Lo   [3] TAMIL LETTER NA..TAMIL LETTER PA
+0BAE..0BB9 ; Consonant # Lo  [12] TAMIL LETTER MA..TAMIL LETTER HA
+0C15..0C28 ; Consonant # Lo  [20] TELUGU LETTER KA..TELUGU LETTER NA
+0C2A..0C39 ; Consonant # Lo  [16] TELUGU LETTER PA..TELUGU LETTER HA
+0C58..0C5A ; Consonant # Lo   [3] TELUGU LETTER TSA..TELUGU LETTER RRRA
+0C95..0CA8 ; Consonant # Lo  [20] KANNADA LETTER KA..KANNADA LETTER NA
+0CAA..0CB3 ; Consonant # Lo  [10] KANNADA LETTER PA..KANNADA LETTER LLA
+0CB5..0CB9 ; Consonant # Lo   [5] KANNADA LETTER VA..KANNADA LETTER HA
+0CDE ; Consonant # Lo       KANNADA LETTER FA
+0D15..0D3A ; Consonant # Lo  [38] MALAYALAM LETTER KA..MALAYALAM LETTER TTTA
+11013..11037 ; Consonant # Lo  [37] BRAHMI LETTER KA..BRAHMI LETTER OLD TAMIL NNNA
+11075 ; Consonant # Lo       BRAHMI LETTER OLD TAMIL LLA
+11191..111B2 ; Consonant # Lo  [34] SHARADA LETTER KA..SHARADA LETTER HA
+11315..11328 ; Consonant # Lo  [20] GRANTHA LETTER KA..GRANTHA LETTER NA
+1132A..11330 ; Consonant # Lo   [7] GRANTHA LETTER PA..GRANTHA LETTER RA
+11332..11333 ; Consonant # Lo   [2] GRANTHA LETTER LA..GRANTHA LETTER LLA
+11335..11339 ; Consonant # Lo   [5] GRANTHA LETTER VA..GRANTHA LETTER HA
+11392..113B5 ; Consonant # Lo  [36] TULU-TIGALARI LETTER KA..TULU-TIGALARI LETTER LLLA
+1168A..116AA ; Consonant # Lo  [33] TAKRI LETTER KA..TAKRI LETTER RRA
+116B8 ; Consonant # Lo       TAKRI LETTER ARCHAIC KHA
+1180A..1182B ; Consonant # Lo  [34] DOGRA LETTER KA..DOGRA LETTER RRA
+# Indic_Syllabic_Category=Consonant_Dead
+09CE ; Consonant_Dead # Lo       BENGALI LETTER KHANDA TA
+0C5D ; Consonant_Dead # Lo       TELUGU LETTER NAKAARA POLLU
+0CDD ; Consonant_Dead # Lo       KANNADA LETTER NAKAARA POLLU
+0D54..0D56 ; Consonant_Dead # Lo   [3] MALAYALAM LETTER CHILLU M..MALAYALAM LETTER CHILLU LLL
+0D7A..0D7F ; Consonant_Dead # Lo   [6] MALAYALAM LETTER CHILLU NN..MALAYALAM LETTER CHILLU K
+1CF2..1CF3 ; Consonant_Dead # Lo   [2] VEDIC SIGN ARDHAVISARGA..VEDIC SIGN ROTATED ARDHAVISARGA
+# Indic_Syllabic_Category=Consonant_With_Stacker
+0CF1..0CF2 ; Consonant_With_Stacker # Lo   [2] KANNADA SIGN JIHVAMULIYA..KANNADA SIGN UPADHMANIYA
+1CF5..1CF6 ; Consonant_With_Stacker # Lo   [2] VEDIC SIGN JIHVAMULIYA..VEDIC SIGN UPADHMANIYA
+11003..11004 ; Consonant_With_Stacker # Lo   [2] BRAHMI SIGN JIHVAMULIYA..BRAHMI SIGN UPADHMANIYA
+# Indic_Syllabic_Category=Consonant_Prefixed
+111C2..111C3 ; Consonant_Prefixed # Lo   [2] SHARADA SIGN JIHVAMULIYA..SHARADA SIGN UPADHMANIYA
+# Indic_Syllabic_Category=Consonant_Preceding_Repha
+0D4E ; Consonant_Preceding_Repha # Lo       MALAYALAM LETTER DOT REPH
+113D1 ; Consonant_Preceding_Repha # Lo       TULU-TIGALARI REPHA
+# Indic_Syllabic_Category=Consonant_Initial_Postfixed
+# Indic_Syllabic_Category=Consonant_Succeeding_Repha
+# Indic_Syllabic_Category=Consonant_Subjoined
+# Indic_Syllabic_Category=Consonant_Medial
+0A75 ; Consonant_Medial # Mn       GURMUKHI SIGN YAKASH
+# Indic_Syllabic_Category=Consonant_Final
+# Indic_Syllabic_Category=Consonant_Head_Letter
+# Indic_Syllabic_Category=Modifying_Letter
+0B83 ; Modifying_Letter # Lo       TAMIL SIGN VISARGA
+# Indic_Syllabic_Category=Tone_Letter
+# Indic_Syllabic_Category=Tone_Mark
+# Indic_Syllabic_Category=Gemination_Mark
+0A71 ; Gemination_Mark # Mn       GURMUKHI ADDAK
+0AFB ; Gemination_Mark # Mn       GUJARATI SIGN SHADDA
+113D2 ; Gemination_Mark # Mn       TULU-TIGALARI GEMINATION MARK
+# Indic_Syllabic_Category=Cantillation_Mark
+0951..0952 ; Cantillation_Mark # Mn   [2] DEVANAGARI STRESS SIGN UDATTA..DEVANAGARI STRESS SIGN ANUDATTA
+0A51 ; Cantillation_Mark # Mn       GURMUKHI SIGN UDAAT
+0AFA ; Cantillation_Mark # Mn       GUJARATI SIGN SUKUN
+0AFC ; Cantillation_Mark # Mn       GUJARATI SIGN MADDAH
+1CD0..1CD2 ; Cantillation_Mark # Mn   [3] VEDIC TONE KARSHANA..VEDIC TONE PRENKHA
+1CD4..1CE0 ; Cantillation_Mark # Mn  [13] VEDIC SIGN YAJURVEDIC MIDLINE SVARITA..VEDIC TONE RIGVEDIC KASHMIRI INDEPENDENT SVARITA
+1CE1 ; Cantillation_Mark # Mc       VEDIC TONE ATHARVAVEDIC INDEPENDENT SVARITA
+1CF4 ; Cantillation_Mark # Mn       VEDIC TONE CANDRA ABOVE
+1CF7 ; Cantillation_Mark # Mc       VEDIC SIGN ATIKRAMA
+1CF8..1CF9 ; Cantillation_Mark # Mn   [2] VEDIC TONE RING ABOVE..VEDIC TONE DOUBLE RING ABOVE
+A8E0..A8F1 ; Cantillation_Mark # Mn  [18] COMBINING DEVANAGARI DIGIT ZERO..COMBINING DEVANAGARI SIGN AVAGRAHA
+11366..1136C ; Cantillation_Mark # Mn   [7] COMBINING GRANTHA DIGIT ZERO..COMBINING GRANTHA DIGIT SIX
+11370..11374 ; Cantillation_Mark # Mn   [5] COMBINING GRANTHA LETTER A..COMBINING GRANTHA LETTER PA
+113E1..113E2 ; Cantillation_Mark # Mn   [2] TULU-TIGALARI VEDIC TONE SVARITA..TULU-TIGALARI VEDIC TONE ANUDATTA
+# Indic_Syllabic_Category=Register_Shifter
+# Indic_Syllabic_Category=Syllable_Modifier
+09FE ; Syllable_Modifier # Mn       BENGALI SANDHI MARK
+111C9 ; Syllable_Modifier # Mn       SHARADA SANDHI MARK
+# Indic_Syllabic_Category=Consonant_Killer
+# Indic_Syllabic_Category=Non_Joiner
+# Indic_Syllabic_Category=Joiner
+# Indic_Syllabic_Category=Number_Joiner
+1107F ; Number_Joiner # Mn       BRAHMI NUMBER JOINER
+# Indic_Syllabic_Category=Number
+0966..096F ; Number # Nd  [10] DEVANAGARI DIGIT ZERO..DEVANAGARI DIGIT NINE
+09E6..09EF ; Number # Nd  [10] BENGALI DIGIT ZERO..BENGALI DIGIT NINE
+0A66..0A6F ; Number # Nd  [10] GURMUKHI DIGIT ZERO..GURMUKHI DIGIT NINE
+0AE6..0AEF ; Number # Nd  [10] GUJARATI DIGIT ZERO..GUJARATI DIGIT NINE
+0B66..0B6F ; Number # Nd  [10] ORIYA DIGIT ZERO..ORIYA DIGIT NINE
+0BE6..0BEF ; Number # Nd  [10] TAMIL DIGIT ZERO..TAMIL DIGIT NINE
+0C66..0C6F ; Number # Nd  [10] TELUGU DIGIT ZERO..TELUGU DIGIT NINE
+0CE6..0CEF ; Number # Nd  [10] KANNADA DIGIT ZERO..KANNADA DIGIT NINE
+0D66..0D6F ; Number # Nd  [10] MALAYALAM DIGIT ZERO..MALAYALAM DIGIT NINE
+11066..1106F ; Number # Nd  [10] BRAHMI DIGIT ZERO..BRAHMI DIGIT NINE
+111D0..111D9 ; Number # Nd  [10] SHARADA DIGIT ZERO..SHARADA DIGIT NINE
+116C0..116C9 ; Number # Nd  [10] TAKRI DIGIT ZERO..TAKRI DIGIT NINE
+# Indic_Syllabic_Category=Brahmi_Joining_Number
+11052..11065 ; Brahmi_Joining_Number # No  [20] BRAHMI NUMBER ONE..BRAHMI NUMBER ONE THOUSAND

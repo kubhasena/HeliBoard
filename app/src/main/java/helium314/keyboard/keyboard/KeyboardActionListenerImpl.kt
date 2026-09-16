@@ -112,6 +112,11 @@ class KeyboardActionListenerImpl(private val latinIME: LatinIME, private val inp
                 latinIME.setGestureDataGatheringMode(latinIME.currentInputEditorInfo, false)
                 return
             }
+            KeyCode.CYCLE_BRAHMIC_INPUT_MODE -> {
+                settings.cycleBrahmicInputMode()
+                latinIME.updateBrahmicVowelLabelsIfNeeded()
+                return
+            }
             KeyCode.BACKGROUND_GATHERING -> {
                 if (BackgroundGatheringCache.isEmpty) {
                     // only enable, no toggle

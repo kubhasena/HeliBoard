@@ -293,6 +293,20 @@
     <string name="incognito">Force incognito mode</string>
     <!-- Description for "prefs_force_incognito_mode" option. -->
     <string name="prefs_force_incognito_mode_summary">Disable learning of new words</string>
+    <!-- Category for Devanagari / Brahmic script input options -->
+    <string name="settings_category_brahmic">Brahmic input</string>
+    <!-- Toolbar key and preference title for cycling Brahmic input mode -->
+    <string name="brahmic_mode">Brahmic input mode</string>
+    <string name="brahmic_mode_summary">Glyphic (Unicode), contextual vowels, or phonetic virama typing</string>
+    <string name="brahmic_mode_glyphic">Glyphic</string>
+    <string name="brahmic_mode_contextual">Contextual vowels</string>
+    <string name="brahmic_mode_phonetic">Phonetic</string>
+    <string name="brahmic_ayogavaha_strip_virama">Ayogavahas strip virama</string>
+    <string name="brahmic_ayogavaha_strip_virama_summary">In phonetic mode, anusvara and visarga remove a trailing virama</string>
+    <string name="brahmic_nukta_part_of_consonant">Nukta is part of the consonant</string>
+    <string name="brahmic_nukta_part_of_consonant_summary">Treat nukta as belonging to the preceding consonant in phonetic mode</string>
+    <string name="brahmic_vowel_labels">Contextual vowel key labels</string>
+    <string name="brahmic_vowel_labels_summary">Vowel keys show the form the cursor context calls for. Where a layout has both a vowel and its matra, the easier key follows the context and the other one types the opposite form</string>
     <!-- Content description for "popup keys" suggestions view -->
     <string name="more_keys_strip_description">More keys</string>
     <!-- Title for input language & layout selection screen -->

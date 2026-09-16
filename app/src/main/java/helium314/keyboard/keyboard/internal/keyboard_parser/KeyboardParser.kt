@@ -14,6 +14,7 @@ import helium314.keyboard.keyboard.internal.keyboard_parser.floris.KeyLabel
 import helium314.keyboard.keyboard.internal.keyboard_parser.floris.KeyType
 import helium314.keyboard.keyboard.internal.keyboard_parser.floris.SimplePopups
 import helium314.keyboard.keyboard.internal.keyboard_parser.floris.TextKeyData
+import helium314.keyboard.latin.brahmic.BrahmicUiState
 import helium314.keyboard.latin.common.isEmoji
 import helium314.keyboard.latin.define.DebugFlags
 import helium314.keyboard.latin.settings.Settings
@@ -45,6 +46,11 @@ class KeyboardParser(private val params: KeyboardParams, private val context: Co
 
     fun parseLayout(): ArrayList<ArrayList<KeyParams>> {
         params.readAttributes(context, null)
+        if (params.mId.element.isAlphabet && params.mId.brahmicDependentVowels != null) {
+            params.mBrahmicVowelRemap = BrahmicVowelKeys.remapFor(params, context)
+            // the rewriter must not touch vowels we hand over in their final form
+            BrahmicUiState.pairedVowels = params.mBrahmicVowelRemap.pairedCodePoints
+        }
 
         // todo: maybe determine layoutType earlier, and to less stuff based on elementId
         val layoutType = when (params.mId.element) {

@@ -18,6 +18,8 @@ import helium314.keyboard.latin.RichInputMethodManager.Companion.getInstance
 import helium314.keyboard.latin.RichInputMethodSubtype
 import helium314.keyboard.latin.RichInputMethodSubtype.Companion.emojiSubtype
 import helium314.keyboard.latin.RichInputMethodSubtype.Companion.noLanguageSubtype
+import helium314.keyboard.latin.brahmic.BrahmicInputMode
+import helium314.keyboard.latin.brahmic.BrahmicUiState
 import helium314.keyboard.latin.settings.Settings
 import helium314.keyboard.latin.settings.SettingsValues
 import helium314.keyboard.latin.utils.DictionaryInfoUtils.getLocalesWithEmojiDicts
@@ -121,6 +123,7 @@ class KeyboardLayoutSet internal constructor(private val mContext: Context, priv
         var script = ScriptUtils.SCRIPT_LATIN
         var internalAction: InternalAction? = null
         var emojiSearchAvailable = false
+        var brahmicDependentVowels: Boolean? = null
 
         // Indicates if the user has enabled the split-layout preference and the required ProductionFlags are enabled.
         var isSplitLayoutEnabled = false
@@ -168,6 +171,10 @@ class KeyboardLayoutSet internal constructor(private val mContext: Context, priv
 
         fun build(): KeyboardLayoutSet {
             params.script = params.subtype.locale.script()
+            val sv = params.settingsValues
+            params.brahmicDependentVowels =
+                if (sv?.mBrahmicVowelLabels == true && sv.mBrahmicInputMode != BrahmicInputMode.GLYPHIC.ordinal)
+                    BrahmicUiState.dependentVowels else null
             return KeyboardLayoutSet(mContext, params)
         }
 

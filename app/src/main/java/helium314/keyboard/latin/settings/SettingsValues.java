@@ -156,6 +156,10 @@ public class SettingsValues {
     private final boolean mOverrideShowingSuggestions;
     public final boolean mSuggestClipboardContent;
     public final boolean mIncognitoModeEnabled;
+    public final int mBrahmicInputMode;
+    public final boolean mBrahmicAyogavahaStripVirama;
+    public final boolean mBrahmicNuktaPartOfConsonant;
+    public final boolean mBrahmicVowelLabels;
     public final boolean mLongPressSymbolsForNumpad;
 
     // From the input box
@@ -270,6 +274,10 @@ public class SettingsValues {
             && (mInputAttributes.mShouldShowSuggestions || mOverrideShowingSuggestions) && !mSuggestionStripHiddenPerUserSettings;
         mIncognitoModeEnabled = prefs.getBoolean(Settings.PREF_ALWAYS_INCOGNITO_MODE, Defaults.PREF_ALWAYS_INCOGNITO_MODE) || mInputAttributes.mNoLearning
                 || mInputAttributes.mIsPasswordField;
+        mBrahmicInputMode = prefs.getInt(Settings.PREF_BRAHMIC_INPUT_MODE, Defaults.PREF_BRAHMIC_INPUT_MODE);
+        mBrahmicAyogavahaStripVirama = prefs.getBoolean(Settings.PREF_BRAHMIC_AYOGAVAHA_STRIP_VIRAMA, Defaults.PREF_BRAHMIC_AYOGAVAHA_STRIP_VIRAMA);
+        mBrahmicNuktaPartOfConsonant = prefs.getBoolean(Settings.PREF_BRAHMIC_NUKTA_PART_OF_CONSONANT, Defaults.PREF_BRAHMIC_NUKTA_PART_OF_CONSONANT);
+        mBrahmicVowelLabels = prefs.getBoolean(Settings.PREF_BRAHMIC_VOWEL_LABELS, Defaults.PREF_BRAHMIC_VOWEL_LABELS);
         mBottomRowScale = Settings.readBottomRowScale(prefs, isLandscape, isFolded);
         mSpaceSwipeHorizontal = Settings.readHorizontalSpaceSwipe(prefs);
         mSpaceSwipeVertical = Settings.readVerticalSpaceSwipe(prefs);

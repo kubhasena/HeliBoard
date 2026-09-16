@@ -1086,11 +1086,12 @@ public class LatinIME extends InputMethodService implements
             // we don't want to update a manually set shift state if selection changed towards one side
             // because this may end the manual shift, which is unwanted in case of shift + arrow keys for changing selection
             // todo: this is not fully implemented yet, and maybe should be behind a setting
-            if (mKeyboardSwitcher.getKeyboard() != null && mKeyboardSwitcher.getKeyboard().mId.getElement().isAlphabetShiftedManually()
-                && ((oldSelEnd == newSelEnd && oldSelStart != newSelStart) || (oldSelEnd != newSelEnd && oldSelStart == newSelStart)))
-                return;
-            mKeyboardSwitcher.updateShiftState(getCurrentAutoCapsState(), getCurrentRecapitalizeState());
+            if (!(mKeyboardSwitcher.getKeyboard() != null && mKeyboardSwitcher.getKeyboard().mId.getElement().isAlphabetShiftedManually()
+                && ((oldSelEnd == newSelEnd && oldSelStart != newSelStart) || (oldSelEnd != newSelEnd && oldSelStart == newSelStart)))) {
+                mKeyboardSwitcher.updateShiftState(getCurrentAutoCapsState(), getCurrentRecapitalizeState());
+            }
         }
+        mInputLogic.updateBrahmicVowelLabelsIfNeeded(settingsValues);
     }
 
     /**
@@ -1418,6 +1419,10 @@ public class LatinIME extends InputMethodService implements
     @Override
     public void onCodeInput(final int codePoint, final int x, final int y, final boolean isKeyRepeat) {
         mKeyboardActionListener.onCodeInput(codePoint, x, y, isKeyRepeat);
+    }
+
+    public void updateBrahmicVowelLabelsIfNeeded() {
+        mInputLogic.updateBrahmicVowelLabelsIfNeeded(mSettings.getCurrent());
     }
 
     // This method is public for testability of LatinIME, but also in the future it should

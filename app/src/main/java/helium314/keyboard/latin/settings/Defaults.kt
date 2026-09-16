@@ -113,6 +113,10 @@ object Defaults {
     const val PREF_AUTOSPACE_BEFORE_GESTURE_TYPING = true
     const val PREF_SHIFT_REMOVES_AUTOSPACE = false
     const val PREF_ALWAYS_INCOGNITO_MODE = false
+    const val PREF_BRAHMIC_INPUT_MODE = 0
+    const val PREF_BRAHMIC_AYOGAVAHA_STRIP_VIRAMA = false
+    const val PREF_BRAHMIC_NUKTA_PART_OF_CONSONANT = true
+    const val PREF_BRAHMIC_VOWEL_LABELS = false
     const val PREF_BIGRAM_PREDICTIONS = true
     const val PREF_SUGGEST_PUNCTUATION = false
     const val PREF_SUGGEST_CLIPBOARD_CONTENT = true

@@ -37,7 +37,12 @@ data class KeyboardId(
     val isSplitLayout: Boolean,
     val oneHandedModeEnabled: Boolean,
     val internalAction: KeyboardLayoutSet.InternalAction?,
-    val emojiSearchAvailable: Boolean
+    val emojiSearchAvailable: Boolean,
+    /**
+     * null when contextual Brahmic vowel keys are off, otherwise whether the cursor sits where a
+     * matra belongs. Part of the id because it changes which form each key of a vowel pair shows.
+     */
+    val brahmicDependentVowels: Boolean? = null
 ) {
     lateinit var editorInfo: EditorInfo // we don't want it in the data class constructor
 
@@ -62,6 +67,7 @@ data class KeyboardId(
         params.settingsValues?.mOneHandedModeEnabled ?: false,
         params.internalAction,
         params.emojiSearchAvailable,
+        params.brahmicDependentVowels,
     ) {
         editorInfo = params.editorInfo
     }

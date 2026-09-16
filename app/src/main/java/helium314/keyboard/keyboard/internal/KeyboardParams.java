@@ -19,6 +19,7 @@ import helium314.keyboard.keyboard.KeyboardId;
 import helium314.keyboard.keyboard.internal.keyboard_parser.LocaleKeyboardInfos;
 import helium314.keyboard.keyboard.internal.keyboard_parser.floris.KeyCode;
 import helium314.keyboard.latin.R;
+import helium314.keyboard.latin.brahmic.BrahmicVowelRemap;
 import helium314.keyboard.latin.settings.Settings;
 import helium314.keyboard.latin.settings.SettingsValues;
 import helium314.keyboard.latin.utils.ResourceUtils;
@@ -93,6 +94,10 @@ public class KeyboardParams {
     @NonNull
     public LocaleKeyboardInfos mLocaleKeyboardInfos;
     public boolean setTabletExtraKeys;
+
+    /** Swaps independent vowel and matra between the slots of a Brahmic vowel pair, see BrahmicVowelKeys. */
+    @NonNull
+    public BrahmicVowelRemap mBrahmicVowelRemap = BrahmicVowelRemap.NONE;
 
     public int mMostCommonKeyHeight = 0;
     public int mMostCommonKeyWidth = 0;

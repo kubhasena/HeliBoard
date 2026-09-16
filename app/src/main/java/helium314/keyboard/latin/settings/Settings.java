@@ -124,6 +124,10 @@ public final class Settings implements SharedPreferences.OnSharedPreferenceChang
     public static final String PREF_AUTOSPACE_BEFORE_GESTURE_TYPING = "autospace_before_gesture_typing";
     public static final String PREF_SHIFT_REMOVES_AUTOSPACE = "shift_removes_autospace";
     public static final String PREF_ALWAYS_INCOGNITO_MODE = "always_incognito_mode";
+    public static final String PREF_BRAHMIC_INPUT_MODE = "brahmic_input_mode";
+    public static final String PREF_BRAHMIC_AYOGAVAHA_STRIP_VIRAMA = "brahmic_ayogavaha_strip_virama";
+    public static final String PREF_BRAHMIC_NUKTA_PART_OF_CONSONANT = "brahmic_nukta_part_of_consonant";
+    public static final String PREF_BRAHMIC_VOWEL_LABELS = "brahmic_vowel_labels";
     public static final String PREF_BIGRAM_PREDICTIONS = "next_word_prediction";
     public static final String PREF_SUGGEST_PUNCTUATION = "suggest_punctuation";
     public static final String PREF_PUNCTUATION_SUGGESTIONS = "punctuation_suggestions";
@@ -349,6 +353,11 @@ public final class Settings implements SharedPreferences.OnSharedPreferenceChang
     public void toggleAlwaysIncognitoMode() {
         final boolean oldValue = mPrefs.getBoolean(Settings.PREF_ALWAYS_INCOGNITO_MODE, Defaults.PREF_ALWAYS_INCOGNITO_MODE);
         mPrefs.edit().putBoolean(Settings.PREF_ALWAYS_INCOGNITO_MODE, !oldValue).apply();
+    }
+
+    public void cycleBrahmicInputMode() {
+        final int oldValue = mPrefs.getInt(PREF_BRAHMIC_INPUT_MODE, Defaults.PREF_BRAHMIC_INPUT_MODE);
+        mPrefs.edit().putInt(PREF_BRAHMIC_INPUT_MODE, (oldValue + 1) % 3).apply();
     }
 
     public static ToolbarMode readToolbarMode(final SharedPreferences prefs) {

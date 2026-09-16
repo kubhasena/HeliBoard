@@ -48,11 +48,17 @@ import helium314.keyboard.latin.SuggestedWords;
 import helium314.keyboard.latin.SuggestedWords.SuggestedWordInfo;
 import helium314.keyboard.latin.WordComposer;
 import helium314.keyboard.latin.common.Constants;
+import helium314.keyboard.latin.common.CoordinateUtils;
 import helium314.keyboard.latin.common.InputPointers;
 import helium314.keyboard.latin.common.StringUtils;
 import helium314.keyboard.latin.common.StringUtilsKt;
 import helium314.keyboard.latin.common.SuggestionSpanUtilsKt;
 import helium314.keyboard.latin.define.DebugFlags;
+import helium314.keyboard.latin.brahmic.BrahmicConfig;
+import helium314.keyboard.latin.brahmic.BrahmicEdit;
+import helium314.keyboard.latin.brahmic.BrahmicInput;
+import helium314.keyboard.latin.brahmic.BrahmicInputMode;
+import helium314.keyboard.latin.brahmic.BrahmicUiState;
 import helium314.keyboard.latin.settings.Settings;
 import helium314.keyboard.latin.settings.SettingsValues;
 import helium314.keyboard.latin.settings.SpacingAndPunctuations;
@@ -241,6 +247,23 @@ public final class InputLogic {
                 SystemClock.uptimeMillis(), mSpaceState,
                 getActualCapsMode(settingsValues, keyboardCapsMode));
         mConnection.beginBatchEdit();
+        CharSequence textBefore = mConnection.getTextBeforeCursor(64, 0);
+        if (textBefore == null) textBefore = "";
+        final BrahmicEdit brahmicEdit = BrahmicInput.applyInsert(textBefore, rawText, brahmicConfig(settingsValues));
+        if (brahmicEdit != null) {
+            // text input never leaves a composing word behind, and the caller goes on to finish any
+            // composition in the connection without telling the word composer about it
+            if (mWordComposer.isComposingWord()) {
+                mConnection.finishComposingText();
+                resetComposingState(false /* alsoResetLastComposedWord */);
+            }
+            applyBrahmicEdit(brahmicEdit, settingsValues, inputTransaction, false /* mayStartComposing */);
+            mConnection.endBatchEdit();
+            mSpaceState = SpaceState.NONE;
+            mWordBeingCorrectedByCursor = null;
+            inputTransaction.requireShiftUpdate(InputTransaction.SHIFT_UPDATE_NOW);
+            return inputTransaction;
+        }
         if (GestureDataGatheringKt.useBackgroundGathering && mConnection.hasSelection())
             BackgroundGatheringCache.INSTANCE.onEditSelection(mConnection.getSelectedText(0), mConnection.getTextBeforeCursor(40, 0), mConnection.getTextAfterCursor(40, 0));
         if (mWordComposer.isComposingWord()) {
@@ -492,16 +515,25 @@ public final class InputLogic {
         if (GestureDataGatheringKt.useBackgroundGathering && mWordComposer.isComposingWord() && mWordComposer.isCursorFrontOrMiddleOfComposingWord())
             BackgroundGatheringCache.INSTANCE.onEditWord(mWordComposer.getTypedWord());
 
-        Event processedEvent = mWordComposer.processEvent(event);
+        mConnection.beginBatchEdit();
+        Event maybeRewritten = maybeRewriteBrahmicInsert(settingsValues, event);
+        // Skip WordComposer.processEvent for Brahmic rewrites so the combiner cache does not
+        // overwrite the already-applied composing text.
+        Event processedEvent = maybeRewritten.isConsumed()
+                ? maybeRewritten : mWordComposer.processEvent(maybeRewritten);
         InputTransaction inputTransaction = new InputTransaction(settingsValues,
                 processedEvent, SystemClock.uptimeMillis(), mSpaceState,
                 getActualCapsMode(settingsValues, keyboardCapsMode));
+        if (maybeRewritten.isConsumed()) {
+            inputTransaction.setDidAffectContents();
+            inputTransaction.setRequiresUpdateSuggestions();
+            inputTransaction.requireShiftUpdate(InputTransaction.SHIFT_UPDATE_NOW);
+        }
         if (processedEvent.getKeyCode() != KeyCode.DELETE
                 || inputTransaction.getTimestamp() > mLastKeyTime + Constants.LONG_PRESS_MILLISECONDS) {
             mDeleteCount = 0;
         }
         mLastKeyTime = inputTransaction.getTimestamp();
-        mConnection.beginBatchEdit();
         if (!mWordComposer.isComposingWord()) {
             // TODO: is this useful? It doesn't look like it should be done here, but rather after
             // a word is committed.
@@ -1294,6 +1326,9 @@ public final class InputLogic {
                     mConnection.getExpectedSelectionEnd(), true /* clearSuggestionStrip */);
             // When we exit this if-clause, mWordComposer.isComposingWord() will return false.
         }
+        if (mWordComposer.isComposingWord() && tryPhoneticBrahmicDelete(inputTransaction)) {
+            return;
+        }
         if (mWordComposer.isComposingWord()) {
             if (mWordComposer.isBatchMode()) {
                 final String rejectedSuggestion = mWordComposer.getTypedWord();
@@ -1369,6 +1404,10 @@ public final class InputLogic {
                     // Likewise
                     return;
                 }
+            }
+
+            if (tryPhoneticBrahmicDelete(inputTransaction)) {
+                return;
             }
 
             boolean hasUnlearnedWordBeingDeleted = false;
@@ -2835,6 +2874,127 @@ public final class InputLogic {
         if (mEmojiDictionaryFacilitator != null) {
             mEmojiDictionaryFacilitator.closeDictionaries();
             mEmojiDictionaryFacilitator = null;
+        }
+    }
+
+    private static BrahmicConfig brahmicConfig(final SettingsValues sv) {
+        return BrahmicConfig.from(sv.mBrahmicInputMode, sv.mBrahmicAyogavahaStripVirama,
+                sv.mBrahmicNuktaPartOfConsonant, BrahmicUiState.pairedVowels);
+    }
+
+    @Nullable
+    private String brahmicInputOf(final Event event) {
+        if (event.getText() != null && event.getText().length() > 0) {
+            return event.getText().toString();
+        }
+        if (event.getCodePoint() > 0) {
+            return StringUtils.newSingleCodePointString(event.getCodePoint());
+        }
+        return null;
+    }
+
+    private Event maybeRewriteBrahmicInsert(final SettingsValues settingsValues, final Event event) {
+        if (event.isFunctionalKeyEvent() && event.getKeyCode() != KeyCode.MULTIPLE_CODE_POINTS) {
+            return event;
+        }
+        final String input = brahmicInputOf(event);
+        if (input == null || input.isEmpty()) return event;
+        CharSequence before = mConnection.getTextBeforeCursor(64, 0);
+        if (before == null) before = "";
+        final BrahmicEdit edit = BrahmicInput.applyInsert(before, input, brahmicConfig(settingsValues));
+        if (edit == null) return event;
+        applyBrahmicEdit(edit, settingsValues, null, true /* mayStartComposing */);
+        return Event.createConsumedEvent(event);
+    }
+
+    private boolean tryPhoneticBrahmicDelete(final InputTransaction inputTransaction) {
+        final SettingsValues sv = inputTransaction.getSettingsValues();
+        if (sv.mBrahmicInputMode != BrahmicInputMode.PHONETIC.ordinal()) return false;
+        if (mConnection.hasSelection()) return false;
+        CharSequence before = mConnection.getTextBeforeCursor(64, 0);
+        if (before == null) before = "";
+        final BrahmicEdit edit = BrahmicInput.applyDelete(before, brahmicConfig(sv));
+        if (edit == null) return false;
+        applyBrahmicEdit(edit, sv, inputTransaction, false /* mayStartComposing */);
+        return true;
+    }
+
+    private void applyBrahmicEdit(final BrahmicEdit edit, final SettingsValues sv,
+            @Nullable final InputTransaction inputTransaction, final boolean mayStartComposing) {
+        if (inputTransaction != null) {
+            inputTransaction.setDidAffectContents();
+            inputTransaction.setRequiresUpdateSuggestions();
+            inputTransaction.requireShiftUpdate(InputTransaction.SHIFT_UPDATE_NOW);
+        }
+        final boolean composing = mWordComposer.isComposingWord();
+        if (composing) {
+            final String typed = mWordComposer.getTypedWord();
+            final int typedCp = Character.codePointCount(typed, 0, typed.length());
+            if (edit.deleteCodePoints <= typedCp) {
+                setComposingWordString(replaceTrailingCodePoints(typed, edit));
+                updateBrahmicVowelLabelsIfNeeded(sv);
+                return;
+            }
+            mConnection.finishComposingText();
+            resetComposingState(false);
+        }
+        CharSequence before = mConnection.getTextBeforeCursor(64, 0);
+        if (before == null) before = "";
+        if (edit.deleteCodePoints > 0) {
+            mConnection.deleteTextBeforeCursor(charsForTrailingCodePoints(before, edit.deleteCodePoints));
+        }
+        if (edit.insert.isEmpty()) {
+            updateBrahmicVowelLabelsIfNeeded(sv);
+            return;
+        }
+        if (mayStartComposing && !composing && edit.deleteCodePoints == 0
+                && sv.needsToLookupSuggestions()) {
+            setComposingWordString(edit.insert);
+        } else {
+            mConnection.commitText(edit.insert, 1);
+        }
+        updateBrahmicVowelLabelsIfNeeded(sv);
+    }
+
+    private static String replaceTrailingCodePoints(final String typed, final BrahmicEdit edit) {
+        final int delChars = charsForTrailingCodePoints(typed, edit.deleteCodePoints);
+        return typed.substring(0, typed.length() - delChars) + edit.insert;
+    }
+
+    private static int charsForTrailingCodePoints(final CharSequence text, final int codePoints) {
+        int index = text.length();
+        for (int i = 0; i < codePoints && index > 0; i++) {
+            index = Character.offsetByCodePoints(text, index, -1);
+        }
+        return text.length() - index;
+    }
+
+    private void setComposingWordString(final String word) {
+        if (word.isEmpty()) {
+            mWordComposer.reset();
+            mConnection.commitText("", 1);
+            return;
+        }
+        final int[] cps = StringUtils.toCodePointArray(word);
+        final int[] coords = CoordinateUtils.newCoordinateArray(cps.length,
+                Constants.NOT_A_COORDINATE, Constants.NOT_A_COORDINATE);
+        mWordComposer.setComposingWord(cps, coords);
+        setComposingTextInternal(getTextWithUnderline(word), 1);
+    }
+
+    public void updateBrahmicVowelLabelsIfNeeded(final SettingsValues sv) {
+        if (!sv.mBrahmicVowelLabels || sv.mBrahmicInputMode == BrahmicInputMode.GLYPHIC.ordinal()) {
+            BrahmicUiState.clearPairedVowels();
+            if (BrahmicUiState.setDependentVowels(false)) {
+                KeyboardSwitcher.getInstance().reloadKeyboard();
+            }
+            return;
+        }
+        CharSequence before = mConnection.getTextBeforeCursor(16, 0);
+        if (before == null) before = "";
+        final boolean dependent = BrahmicInput.wantsDependentVowelLabels(before, brahmicConfig(sv));
+        if (BrahmicUiState.setDependentVowels(dependent)) {
+            KeyboardSwitcher.getInstance().reloadKeyboard();
         }
     }
 }
