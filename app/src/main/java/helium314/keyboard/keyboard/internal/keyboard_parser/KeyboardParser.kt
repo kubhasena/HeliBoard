@@ -14,6 +14,7 @@ import helium314.keyboard.keyboard.internal.keyboard_parser.floris.KeyLabel
 import helium314.keyboard.keyboard.internal.keyboard_parser.floris.KeyType
 import helium314.keyboard.keyboard.internal.keyboard_parser.floris.SimplePopups
 import helium314.keyboard.keyboard.internal.keyboard_parser.floris.TextKeyData
+import helium314.keyboard.latin.brahmic.BrahmicInputMode
 import helium314.keyboard.latin.brahmic.BrahmicUiState
 import helium314.keyboard.latin.common.isEmoji
 import helium314.keyboard.latin.define.DebugFlags
@@ -46,10 +47,14 @@ class KeyboardParser(private val params: KeyboardParams, private val context: Co
 
     fun parseLayout(): ArrayList<ArrayList<KeyParams>> {
         params.readAttributes(context, null)
-        if (params.mId.element.isAlphabet && params.mId.brahmicDependentVowels != null) {
-            params.mBrahmicVowelRemap = BrahmicVowelKeys.remapFor(params, context)
-            // the rewriter must not touch vowels we hand over in their final form
-            BrahmicUiState.pairedVowels = params.mBrahmicVowelRemap.pairedCodePoints
+        if (params.mId.element.isAlphabet) {
+            if (params.mId.brahmicDependentVowels != null) {
+                params.mBrahmicVowelRemap = BrahmicVowelKeys.remapFor(params, context)
+                BrahmicUiState.pairedVowels = params.mBrahmicVowelRemap.pairedCodePoints
+            } else if (Settings.getValues().mBrahmicInputMode != BrahmicInputMode.GLYPHIC.ordinal) {
+                // labels are off, but the rewriter still needs to know which vowels have both forms
+                BrahmicUiState.pairedVowels = BrahmicVowelKeys.pairsFor(params, context)
+            }
         }
 
         // todo: maybe determine layoutType earlier, and to less stuff based on elementId

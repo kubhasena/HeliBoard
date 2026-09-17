@@ -35,7 +35,9 @@ class BrahmicVowelRemapTest {
     @Test
     fun independentOnTheEasierSlotSwapsTheOtherWay() {
         val slots = mapOf(aa to BrahmicVowelSlot.UNSHIFTED, matraAa to BrahmicVowelSlot.POPUP_MAIN)
-        assertTrue(BrahmicVowelRemap.build(slots, dependentContext = false).isEmpty)
+        val independent = BrahmicVowelRemap.build(slots, dependentContext = false)
+        assertTrue(independent.isEmpty) // labels already match, but both forms exist
+        assertEquals(setOf(aa, matraAa), independent.pairedCodePoints)
         val remap = BrahmicVowelRemap.build(slots, dependentContext = true)
         assertEquals(matraAa, remap.remapCodePoint(aa))
         assertEquals(aa, remap.remapCodePoint(matraAa))

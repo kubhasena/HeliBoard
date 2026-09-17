@@ -35,6 +35,15 @@ object BrahmicVowelKeys {
         return BrahmicVowelRemap.build(LayoutParser.brahmicVowelSlots(params, context), dependentContext)
     }
 
+    /**
+     * Vowels the layout offers in both independent and matra form. Used by the rewriter so the
+     * anti-contextual key can type an orphaned matra even when labels are not swapping.
+     */
+    fun pairsFor(params: KeyboardParams, context: Context): Set<Int> {
+        if (!params.mId.element.isAlphabet) return emptySet()
+        return BrahmicVowelRemap.build(LayoutParser.brahmicVowelSlots(params, context), false).pairedCodePoints
+    }
+
     /** @return easiest slot rank per vowel code point, see [BrahmicVowelSlot] */
     fun scanSlots(
         rows: List<List<AbstractKeyData>>,

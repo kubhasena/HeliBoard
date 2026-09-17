@@ -114,6 +114,13 @@ android {
     }
 }
 
+// Gradle 9 hashes NDK soFolder while clang still has *.o.tmp open on Windows.
+tasks.configureEach {
+    if (name.startsWith("buildNdkBuild")) {
+        doNotTrackState("Windows NDK leaves locked .o.tmp files under soFolder")
+    }
+}
+
 dependencies {
     // androidx
     implementation("androidx.core:core-ktx:1.17.0") // 1.18.0 requires minSdk 23

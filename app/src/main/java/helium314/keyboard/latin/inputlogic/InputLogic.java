@@ -2983,8 +2983,14 @@ public final class InputLogic {
     }
 
     public void updateBrahmicVowelLabelsIfNeeded(final SettingsValues sv) {
-        if (!sv.mBrahmicVowelLabels || sv.mBrahmicInputMode == BrahmicInputMode.GLYPHIC.ordinal()) {
+        if (sv.mBrahmicInputMode == BrahmicInputMode.GLYPHIC.ordinal()) {
             BrahmicUiState.clearPairedVowels();
+            if (BrahmicUiState.setDependentVowels(false)) {
+                KeyboardSwitcher.getInstance().reloadKeyboard();
+            }
+            return;
+        }
+        if (!sv.mBrahmicVowelLabels) {
             if (BrahmicUiState.setDependentVowels(false)) {
                 KeyboardSwitcher.getInstance().reloadKeyboard();
             }
