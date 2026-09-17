@@ -358,7 +358,7 @@ def main() -> None:
 
     kt = []
     kt.append("// SPDX-License-Identifier: GPL-3.0-only")
-    kt.append("package helium314.keyboard.latin.brahmic")
+    kt.append("package vidyullekha.keyboard.latin.brahmic")
     kt.append("")
     kt.append("/**")
     kt.append(" * Per-script Brahmic classification, derived from Unicode Indic_Syllabic_Category")
@@ -587,7 +587,7 @@ def main() -> None:
     kt.append("}")
     kt.append("")
 
-    out_kt = repo / "app" / "src" / "main" / "java" / "helium314" / "keyboard" / "latin" / "brahmic" / "BrahmicScripts.kt"
+    out_kt = repo / "app" / "src" / "main" / "java" / "vidyullekha" / "keyboard" / "latin" / "brahmic" / "BrahmicScripts.kt"
     out_kt.write_text("\n".join(kt), encoding="utf-8")
 
     # dump a small summary for sanity

@@ -10,7 +10,7 @@ android {
     compileSdk = 37
 
     defaultConfig {
-        applicationId = "helium314.keyboard"
+        applicationId = "vidyullekha.keyboard"
         minSdk = 21
         targetSdk = 37
         versionCode = 4101
@@ -65,7 +65,7 @@ android {
             }
             variant.outputs.forEach { output ->
                 if (output is com.android.build.api.variant.impl.VariantOutputImpl) {
-                    output.outputFileName = "HeliBoard_${defaultConfig.versionName}-${variant.buildType}.apk"
+                    output.outputFileName = "Vidyullekha_${defaultConfig.versionName}-${variant.buildType}.apk"
                 }
             }
         }
@@ -108,7 +108,7 @@ android {
         includeInBundle = false
     }
 
-    namespace = "helium314.keyboard.latin"
+    namespace = "vidyullekha.keyboard.latin"
     lint {
         abortOnError = true
     }

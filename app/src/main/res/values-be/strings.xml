@@ -99,12 +99,12 @@
     <string name="settings_category_miscellaneous">Рознае</string>
     <string name="settings_no_limit">Без абмежаванняў</string>
     <string name="abbreviation_unit_minutes">%s хв.</string>
-    <string name="android_spell_checker_settings">Налады праверкі правапісу HeliBoard</string>
+    <string name="android_spell_checker_settings">Налады праверкі правапісу Vidyullekha</string>
     <string name="show_emoji_key">Клавіша эмодзі</string>
-    <string name="ime_settings">Налады HeliBoard</string>
+    <string name="ime_settings">Налады Vidyullekha</string>
     <string name="settings_category_input">Ўвод</string>
     <string name="settings_category_additional_keys">Дадатковыя клавішы</string>
-    <string name="spell_checker_service_name">Праверка правапісу HeliBoard</string>
+    <string name="spell_checker_service_name">Праверка правапісу Vidyullekha</string>
     <string name="enable_clipboard_history">Ўключыць гісторыю буфера абмену</string>
     <string name="enable_clipboard_history_summary">Калі выключана, клавіша буфера абмену будзе ўстаўляць змесціва буфера абмену, калі яно ёсць</string>
     <string name="clipboard_history_retention_time">Час захоўвання гісторыі буфера абмену</string>
@@ -381,11 +381,7 @@
     <string name="customize_toolbar_key_codes">Наладзіць коды клавіш панэлі інструментаў</string>
     <string name="prefs_space_bar_text">Карыстацкі тэкст на клавішы прабела</string>
     <string name="label_space_key_for_number_layout" tools:keep="@string/label_space_key_for_number_layout">Прабел (раскладка лічбаў)</string>
-    <string name="label_switch_onehanded_key" tools:keep="@string/label_switch_onehanded_key">Пераключыць бок рэжыму адной рукой</string>
-    <string name="get_colors_message">Знайсці і падзяліцца колерамі ў %s.</string>
-    <string name="get_layouts_message">Знайсці і падзяліцца раскладкамі ў %s.</string>
-    <string name="discussion_section_link">абмеркавання</string>
-    <string name="label_shift_key_locked" tools:keep="@string/label_shift_key_locked">Caps lock</string>
+    <string name="label_switch_onehanded_key" tools:keep="@string/label_switch_onehanded_key">Пераключыць бок рэжыму адной рукой</string>    <string name="label_shift_key_locked" tools:keep="@string/label_shift_key_locked">Caps lock</string>
     <string name="label_stop_onehanded_mode_key" tools:keep="@string/label_stop_onehanded_mode_key">Завяршыць рэжым адной рукой</string>
     <string name="label_resize_onehanded_key" tools:keep="@string/label_resize_onehanded_key">Змяніць памер у рэжыме адной рукой</string>
     <string name="label_shortcut_key_disabled" tools:keep="@string/label_shortcut_key_disabled">Галасавы ўвод адключаны</string>

@@ -101,13 +101,13 @@
     <string name="show_hints">Tampilkan petunjuk tombol</string>
     <string name="number_row_summary">Selalu tampilkan baris angka</string>
     <string name="abbreviation_unit_minutes">%s mnt</string>
-    <string name="spell_checker_service_name">Pemeriksa Ejaan HeliBoard</string>
-    <string name="android_spell_checker_settings">Pengaturan Pemeriksa Ejaan HeliBoard</string>
+    <string name="spell_checker_service_name">Pemeriksa Ejaan Vidyullekha</string>
+    <string name="android_spell_checker_settings">Pengaturan Pemeriksa Ejaan Vidyullekha</string>
     <string name="number_row">Baris angka</string>
     <string name="prefs_long_press_keyboard_to_change_lang">Ubah metode masukan dengan tombol spasi</string>
     <string name="incognito">Paksa mode privat</string>
     <string name="show_emoji_key">Tombol emoji</string>
-    <string name="ime_settings">Pengaturan HeliBoard</string>
+    <string name="ime_settings">Pengaturan Vidyullekha</string>
     <string name="settings_category_input">Masukan</string>
     <string name="settings_category_additional_keys">Tombol tambahan</string>
     <string name="settings_category_suggestions">Saran</string>
@@ -383,13 +383,9 @@
     <string name="icon_style">Ikon style</string>
     <string name="label_bin" tools:keep="@string/label_bin">bin</string>
     <string name="custom_subtype">Subtipe khusus</string>
-    <string name="settings_screen_secondary_layouts">Tata letak sekunder</string>
-    <string name="discussion_section_link">Bagian Diskusi</string>
-    <string name="layout_in_use">PERINGATAN: Tata letak sedang digunakan saat ini</string>
+    <string name="settings_screen_secondary_layouts">Tata letak sekunder</string>    <string name="layout_in_use">PERINGATAN: Tata letak sedang digunakan saat ini</string>
     <string name="layout_functional_keys_tablet" tools:keep="@string/layout_functional_keys_tablet">Kunci fungsional (layar besar)</string>
-    <string name="subtype_baishakhi_bn_IN">%s (Baishakhi)</string>
-    <string name="get_layouts_message">Anda dapat menemukan dan berbagi tata letak di %s.</string>
-    <string name="delete_confirmation">Benaran mau dihapus %s?</string>
+    <string name="subtype_baishakhi_bn_IN">%s (Baishakhi)</string>    <string name="delete_confirmation">Benaran mau dihapus %s?</string>
     <string name="name_invalid">Nama invalid</string>
     <string name="prefs_font_scale">Skala font keyboard</string>
     <string name="prefs_emoji_font_scale">Skala font tampilan emoji</string>
@@ -397,9 +393,7 @@
     <string name="number_row_hints">Tampilkan petunjuk pada baris nomor</string>
     <string name="prefs_language_swipe_distance">Beralih Jarak Gesek Bahasa</string>
     <string name="locales_with_dict">Bahasa dengan kamus</string>
-    <string name="split" tools:keep="@string/split">Keyboard terpisah</string>
-    <string name="get_colors_message">Anda dapat menemukan dan berbagi warna di %s.</string>
-    <string name="layout_number_row_basic" tools:keep="@string/layout_number_row_basic">Baris nomor (dasar)</string>
+    <string name="split" tools:keep="@string/split">Keyboard terpisah</string>    <string name="layout_number_row_basic" tools:keep="@string/layout_number_row_basic">Baris nomor (dasar)</string>
     <string name="prefs_always_show_suggestions_except_web_text_summary">Bidang edit web (kebanyakan ditemukan di browser) adalah penyebab yang sangat umum untuk masalah dengan pengaturan saran yang selalu ditampilkan</string>
     <string name="prefs_always_show_suggestions_except_web_text">Jangan selalu menampilkan saran untuk bidang edit web</string>
     <string name="settings_category_space">Spasi</string>

@@ -1,4 +1,4 @@
-HeliBoard adalah papan ketik sumber terbuka yang mengutamakan privasi, berdasarkan AOSP OpenBoard.
+Vidyullekha adalah papan ketik sumber terbuka yang mengutamakan privasi, berdasarkan AOSP OpenBoard.
 
 Tidak menggunakan izin internet, dan karenanya 100% offline.
 
@@ -10,7 +10,7 @@ Fitur:
 
 <ul>
 
-<li>buat kamus Anda sendiri, atau dapatkan <a href="https:codeberg.orgHelium314aosp-dictionaries#dictionaries">di sini<a>, atau di bagian <a href="https:codeberg.orgHelium314aosp-dictionaries#experimental-dictionaries">eksperimental<a> (kualitas dapat bervariasi)<li>
+<li>buat kamus Anda sendiri, atau dapatkan <a href="https:codeberg.orgVidyullekhaaosp-dictionaries#dictionaries">di sini<a>, atau di bagian <a href="https:codeberg.orgVidyullekhaaosp-dictionaries#experimental-dictionaries">eksperimental<a> (kualitas dapat bervariasi)<li>
 
 <li>kamus tambahan untuk emoji atau simbol ilmiah dapat digunakan untuk memberikan saran (mirip dengan "pencarian emoji")<li>
 
@@ -28,7 +28,7 @@ Fitur:
 
 <ul>
 
-<li>Sesuaikan tata letak keyboard <a href="https:github.comHelium314HeliBoardblobmainlayouts.md">(hanya tersedia saat menonaktifkan <i>gunakan bahasa sistem<i>)<li>
+<li>Sesuaikan tata letak keyboard <a href="https:github.comVidyullekhaVidyullekhablobmainlayouts.md">(hanya tersedia saat menonaktifkan <i>gunakan bahasa sistem<i>)<li>
 
 <li>Sesuaikan tata letak khusus, seperti simbol, angka, atau tata letak tombol fungsional<li>
 

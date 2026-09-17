@@ -113,8 +113,8 @@
     <string name="theme_colors">Litir</string>
     <string name="style_name_Rounded" tools:keep="@string/style_name_Rounded">Rúnnað</string>
     <string name="theme_style">Stíll</string>
-    <string name="spell_checker_service_name">Stafsetningarleiðrétting HeliBoard</string>
-    <string name="ime_settings">Stillingar HeliBoard</string>
+    <string name="spell_checker_service_name">Stafsetningarleiðrétting Vidyullekha</string>
+    <string name="ime_settings">Stillingar Vidyullekha</string>
     <string name="button_backup">Öryggisafrit</string>
     <string name="load_gesture_library_button_load">Hlaða inn orðasafni</string>
     <string name="load_gesture_library_button_delete">Eyða orðasafni</string>
@@ -124,7 +124,7 @@
     <string name="button_select_language">Veldu tungumál</string>
     <string name="replace_dictionary">Skipta út orðasafni</string>
     <string name="select_word" tools:keep="@string/select_word">Veldu orð</string>
-    <string name="android_spell_checker_settings">Stillingar stafsetningarleiðréttingar HeliBoard</string>
+    <string name="android_spell_checker_settings">Stillingar stafsetningarleiðréttingar Vidyullekha</string>
     <string name="settings_category_input">Innsláttur</string>
     <string name="settings_category_additional_keys">Viðbótarlyklar</string>
     <string name="settings_category_clipboard_history">Ferilskrá klippispjalds</string>
@@ -512,11 +512,7 @@
     <string name="timestamp_format_title">Snið fyrir tímamerkislykil</string>
     <string name="popup_order_and_hint_source">Röðun sprettlykla og uppruni ábendinga</string>
     <string name="prefs_hint_font_scale">Kvarði leturlykils</string>
-    <string name="prefs_emoji_key_fit">Kvarða stærð táknalykils með stærð leturs</string>
-    <string name="get_colors_message">Þú getur fundið nýja liti og deilt þínum á %s.</string>
-    <string name="get_layouts_message">Þú getur fundið nýjar framsetningar og deilt þínum á %s.</string>
-    <string name="discussion_section_link">umræðusvæðinu</string>
-    <string name="toolbar_only_with_hw_keyboard">Einungis birta verkfærastiku með raunverulegu lyklaborð</string>
+    <string name="prefs_emoji_key_fit">Kvarða stærð táknalykils með stærð leturs</string>    <string name="toolbar_only_with_hw_keyboard">Einungis birta verkfærastiku með raunverulegu lyklaborð</string>
     <string name="gesture_data_next_save">Náði %s. Gakktu úr skugga um að þú hafir gert rétta bendingu</string>
     <string name="gesture_data_active_count">%1$s orð í þessari setu, %2$s orð alls (%3$s þegar send inn eða eytt)</string>
     <string name="gesture_data_ends_at">Söfnun bendingagagna mun ljúka %s. Sendu inn gögnin þín fyrir þann tíma.</string>

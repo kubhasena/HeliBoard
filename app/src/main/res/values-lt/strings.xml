@@ -105,9 +105,9 @@
     <string name="label_search_key">"Paieška"</string>
     <string name="label_pause_key">Pristabdyti</string>
     <string name="label_wait_key">"Lauk."</string>
-    <string name="spell_checker_service_name">HeliBoard rašybos tikrinimas</string>
-    <string name="ime_settings">HeliBoard nustatymai</string>
-    <string name="android_spell_checker_settings">HeliBoard rašybos tikrinimo nustatymai</string>
+    <string name="spell_checker_service_name">Vidyullekha rašybos tikrinimas</string>
+    <string name="ime_settings">Vidyullekha nustatymai</string>
+    <string name="android_spell_checker_settings">Vidyullekha rašybos tikrinimo nustatymai</string>
     <string name="vibrate_in_dnd_mode">Vibruoti netrukdymo režime</string>
     <string name="suggest_emojis">Siūlyti jaustukus</string>
     <string name="suggest_emojis_summary">Naudoti jaustukų žodyną įprastuose pasiūlymuose</string>
@@ -380,11 +380,7 @@
     <string name="select_color_spacebar_background">Tarpo fonas</string>
     <string name="select_color_spacebar_text">Tarpo tekstas</string>
     <string name="select_color_accent">Kirtis</string>
-    <string name="select_color_gesture">Gestų įvestis</string>
-    <string name="get_colors_message">Galite pasirinkti ir dalintis spalvomis %s.</string>
-    <string name="get_layouts_message">Galite rasti ir dalintis išdėstymais %s.</string>
-    <string name="discussion_section_link">diskusijų vieta</string>
-    <string name="settings_screen_about">Apie</string>
+    <string name="select_color_gesture">Gestų įvestis</string>    <string name="settings_screen_about">Apie</string>
     <string name="version">Versija</string>
     <string name="about_github_link">Peržiūrėti GitHub</string>
     <string name="about_wiki_link">Eiti į Wiki</string>

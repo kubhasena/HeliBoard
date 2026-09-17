@@ -98,12 +98,12 @@
     <string name="enable_clipboard_history">Povoliť históriu schránky</string>
     <string name="prefs_force_incognito_mode_summary">Vypnúť učenie nových slov</string>
     <string name="more_keys_strip_description">Viac kláves</string>
-    <string name="spell_checker_service_name">Kontrola pravopisu v HeliBoard</string>
-    <string name="android_spell_checker_settings">Nastavenia kontroly pravopisu v HeliBoard</string>
+    <string name="spell_checker_service_name">Kontrola pravopisu v Vidyullekha</string>
+    <string name="android_spell_checker_settings">Nastavenia kontroly pravopisu v Vidyullekha</string>
     <string name="show_emoji_key">Emoji klávesa</string>
     <string name="incognito">Vynútiť režim inkognito</string>
     <string name="settings_category_input">Vstup</string>
-    <string name="ime_settings">Nastavenia HeliBoardu</string>
+    <string name="ime_settings">Nastavenia Vidyullekhau</string>
     <string name="settings_category_additional_keys">Dodatočné klávesy</string>
     <string name="settings_category_correction">Korekcie</string>
     <string name="settings_category_suggestions">Návrhy</string>
@@ -400,11 +400,7 @@
     <string name="select_color_spacebar_background">Pozadie medzerníka</string>
     <string name="select_color_spacebar_text">Text na medzerníku</string>
     <string name="select_color_accent">Prízvuk</string>
-    <string name="select_color_gesture">Zadávanie gestami</string>
-    <string name="get_colors_message">V %s môžete vyhľadávať a zdieľať farby.</string>
-    <string name="get_layouts_message">V %s môžete vyhľadávať a zdieľať rozloženia.</string>
-    <string name="discussion_section_link">diskusná časť</string>
-    <string name="settings_screen_about">O aplikácii</string>
+    <string name="select_color_gesture">Zadávanie gestami</string>    <string name="settings_screen_about">O aplikácii</string>
     <string name="version">Verzia</string>
     <string name="about_github_link">Zobraziť na GitHub</string>
     <string name="about_wiki_link">Prejsť na Wiki</string>
@@ -477,7 +473,7 @@
     <string name="gesture_data_description">&lt;b&gt;Vitajte na obrazovke na zber údajov o gestách!&lt;/b&gt;&lt;br/&gt;&lt;br/&gt; Ide o súčasť &lt;a href=https://nlnet.nl/project/GestureTyping&gt;projektu financovaného organizáciou NLnet&lt;/a&gt;, ktorého cieľom je vytvoriť úplne otvorenú knižnicu pre písanie pomocou gest, schopnú nahradiť uzavretú knižnicu spoločnosti Google. &lt;br/&gt; Výsledkom by mala byť jednoduchá náhrada za klávesnice založené na AOSP, ktorá však bude použiteľná aj s inými klávesnicami, napr. s FlorisBoard.&lt;br/&gt;&lt;br/&gt; Pre vývoj knižnice je nesmierne užitočné mať k dispozícii podrobné údaje o gestách v rôznych jazykoch a od rôznych používateľov.&lt;br/&gt; Zberom a odoslaním údajov o písaní pomocou gest môžete prispieť k otvorenému súboru údajov o gestách, ktorý sa použije na vývoj knižnice. Súbor údajov bude uverejnený pod licenciou CC BY-SA 4.0 krátko po ukončení fázy zberu údajov na %s. Akonáhle údaje nazbierate, môžete ich odoslať pomocou ikony zdieľania v dolnej časti tejto obrazovky.</string>
     <string name="gesture_data_info">Čo je to?</string>
     <string name="gesture_data_description_modes">„Bezpečným“ spôsobom, ako prispieť, je režim &lt;i&gt;aktívneho zbierania&lt;/i&gt;, v ktorom sa vám zobrazí konkrétne slovo a vy ho zadáte pomocou gestového písania.&lt;br&gt; Môžete tiež použiť režim &lt;i&gt;zbierania na pozadí&lt;/i&gt;, v ktorom môžete poskytnúť ukážky zo svojho bežného gestového písania z iných aplikácií. Vzhľadom na citlivosť tohto prístupu je táto funkcia voliteľná, konfigurovateľná a obsahuje obrazovku na kontrolu údajov, ktoré sa chystáte odoslať.</string>
-    <string name="gesture_data_description_privacy">Ochrana osobných údajov\n\n Údaje, ktoré odosielate, pozostávajú z cieľového slova, rozloženia klávesnice a jej rozmerov, gest (časov a súradníc), návrhov z aktuálnej knižnice, hash kódov použitých slovníkov, verzie aplikácie, režimu zberu údajov, informácie o tom, či je knižnica pre písanie gestami predvolenou knižnicou od Google, a identifikátora priradeného ku každému gestu.\n Odoslané údaje budú stiahnuté a čo najskôr vymazané z poštovej schránky ProtonMail, kde sú uložené. Po ukončení fázy zberu údajov o gestách bude súbor údajov zhromaždených od všetkých používateľov zverejnený pod licenciou Creative Commons BY-SA 4.0.\n\n V rámci snahy o ochranu vášho súkromia nebudete výslovne uvedení ako autori. Vaše meno bude uvedené ako „Prispievatelia projektu HeliBoard Gesture Data Project“. Nemalo by byť možné prepojiť údaje, ktoré generujete na tejto obrazovke s vašou identitou. Mohlo by však byť možné určiť, ktoré gestá vykonala tá istá osoba. To je možné napríklad na základe vlastného rozloženia klávesnice, rozmerov klávesnice, jazyka alebo individuálneho štýlu gestikulácie.</string>
+    <string name="gesture_data_description_privacy">Ochrana osobných údajov\n\n Údaje, ktoré odosielate, pozostávajú z cieľového slova, rozloženia klávesnice a jej rozmerov, gest (časov a súradníc), návrhov z aktuálnej knižnice, hash kódov použitých slovníkov, verzie aplikácie, režimu zberu údajov, informácie o tom, či je knižnica pre písanie gestami predvolenou knižnicou od Google, a identifikátora priradeného ku každému gestu.\n Odoslané údaje budú stiahnuté a čo najskôr vymazané z poštovej schránky ProtonMail, kde sú uložené. Po ukončení fázy zberu údajov o gestách bude súbor údajov zhromaždených od všetkých používateľov zverejnený pod licenciou Creative Commons BY-SA 4.0.\n\n V rámci snahy o ochranu vášho súkromia nebudete výslovne uvedení ako autori. Vaše meno bude uvedené ako „Prispievatelia projektu Vidyullekha Gesture Data Project“. Nemalo by byť možné prepojiť údaje, ktoré generujete na tejto obrazovke s vašou identitou. Mohlo by však byť možné určiť, ktoré gestá vykonala tá istá osoba. To je možné napríklad na základe vlastného rozloženia klávesnice, rozmerov klávesnice, jazyka alebo individuálneho štýlu gestikulácie.</string>
     <string name="gesture_data_privacy">Ochrana osobných údajov</string>
     <string name="gesture_data_get_data">Zdieľať súbor s údajmi o gestách</string>
     <string name="gesture_data_delete_data">Vymazať údaje o gestách</string>
@@ -510,7 +506,7 @@
     <string name="gesture_data_delete_dialog_submitted">Odstrániť %s zadaných slov</string>
     <string name="gesture_data_many_not_shared_words">Máte viac ako %s slov, ktoré čakajú na odoslanie</string>
     <string name="gesture_data_email_body">DÔLEŽITÉ:\n\n Ahoj!\nPripomíname, že tieto údaje budú verejne zdieľané pod licenciou CC BY-SA 4.0 a vy nebudete uvedení ako autori, aby sme chránili vaše súkromie.\n\n Ďakujeme, že ste s nami zdieľali práva k vašim údajom. Využijeme ich na dobrú vec!\n\n Upozorňujeme, že zmena znenia tohto oznámenia nemení to, čo budeme s vašimi údajmi robiť. Nejedná sa o zmluvu, ktorú je možné meniť, je to len priateľská pripomienka!\n Ak nám chcete spolu s údajmi poslať správu, napíšte ju pod túto čiaru.\n ---------------------------------------------</string>
-    <string name="gesture_data_promotion_message">Ahoj!\n Keďže si nainštaloval knižnicu pre písanie pomocou gest, možno ťa zaujíma projekt HeliBoard zameraný na vytvorenie úplne otvorenej knižnice pre písanie pomocou gest. Môžeš pomôcť tým, že prispieš údajmi o gestách. Viac informácií nájdeš na obrazovke zberu údajov o gestách.</string>
+    <string name="gesture_data_promotion_message">Ahoj!\n Keďže si nainštaloval knižnicu pre písanie pomocou gest, možno ťa zaujíma projekt Vidyullekha zameraný na vytvorenie úplne otvorenej knižnice pre písanie pomocou gest. Môžeš pomôcť tým, že prispieš údajmi o gestách. Viac informácií nájdeš na obrazovke zberu údajov o gestách.</string>
     <string name="gesture_data_reminder_message">Ahoj!\n Predtým si zbieral údaje o gestách, ale už dosť dlho si žiadne údaje nepridal. Chceš opäť prispievať?</string>
     <string name="gesture_data_take_me_there">Vezmi ma tam</string>
     <string name="background_gesture_data_links">Informácie o zhromažďovaní údajov na pozadí:</string>
@@ -520,7 +516,7 @@
     <string name="gesture_data_background_gathering_manual_save">V predvolenom nastavení odmietnuť</string>
     <string name="gesture_data_background_gathering_manual_save_summary">Údaje sa ukladajú ručne pomocou tlačidla na paneli nástrojov</string>
     <string name="gesture_data_background_gathering_info">Ďalšie informácie</string>
-    <string name="gesture_data_background_gathering_info_message">Zapnutím zberu údajov na pozadí umožníte aplikácii Heliboard zaznamenávať gestá, ktoré zadávate v iných aplikáciách. To je veľmi užitočné pre projekt písania pomocou gest, keďže takýmto spôsobom je možné získať značné množstvo údajov, hoci v nižšej kvalite ako pri aktívnom zbere. Zber údajov na pozadí nenahrádza aktívne zhromažďované údaje, ale má slúžiť ako doplnok, keďže kvalita údajov je dôležitejšia ako ich množstvo.\n\n Zber údajov na pozadí so sebou prináša vysoké riziko zhromažďovania údajov, ktoré môžete považovať za príliš súkromné na zdieľanie, a to aj v prípade, že sú zverejnené anonymne. Z tohto dôvodu chceme objasniť, kedy sa údaje o gestách zbierajú a ako to môžete ovplyvniť.\n\n V sekcii odkazov v pravom dolnom rohu tejto obrazovky nájdete video, v ktorom sa dozviete viac o zbere údajov na pozadí.</string>
+    <string name="gesture_data_background_gathering_info_message">Zapnutím zberu údajov na pozadí umožníte aplikácii Vidyullekha zaznamenávať gestá, ktoré zadávate v iných aplikáciách. To je veľmi užitočné pre projekt písania pomocou gest, keďže takýmto spôsobom je možné získať značné množstvo údajov, hoci v nižšej kvalite ako pri aktívnom zbere. Zber údajov na pozadí nenahrádza aktívne zhromažďované údaje, ale má slúžiť ako doplnok, keďže kvalita údajov je dôležitejšia ako ich množstvo.\n\n Zber údajov na pozadí so sebou prináša vysoké riziko zhromažďovania údajov, ktoré môžete považovať za príliš súkromné na zdieľanie, a to aj v prípade, že sú zverejnené anonymne. Z tohto dôvodu chceme objasniť, kedy sa údaje o gestách zbierajú a ako to môžete ovplyvniť.\n\n V sekcii odkazov v pravom dolnom rohu tejto obrazovky nájdete video, v ktorom sa dozviete viac o zbere údajov na pozadí.</string>
     <string name="gesture_data_background_gathering_indicator">Ukazovateľ zberu údajov</string>
     <string name="gesture_data_background_gathering_indicator_message">Vždy, keď sa zaznamenávajú údaje o gestách, v ľavom dolnom rohu klávesnice sa zobrazí indikačná ikona. Keď je kruh vyplnený, znamená to, že bolo zaznamenané aspoň jedno gesto a čaká na uloženie. Údaje sa ukladajú buď pomocou tlačidla na paneli nástrojov (pozri &lt;i&gt;%1$s&lt;/i&gt;), alebo automaticky (ak je &lt;i&gt;%2$s&lt;/i&gt; vypnutá). Automatické ukladanie sa zvyčajne vykonáva pri prechode medzi textovými poľami alebo pri zatvorení klávesnice, môže sa však uskutočniť aj v prípade, ak sa textové pole zmení z iného dôvodu. Počas ukladania údajov sa indikátor na krátku chvíľu zmení na zelený.</string>
     <string name="gesture_data_background_gathering_control">Ako ovládať, čo sa ukladá</string>

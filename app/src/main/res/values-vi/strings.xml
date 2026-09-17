@@ -147,9 +147,7 @@
     <string name="theme_name_blue_gray" tools:keep="@string/theme_name_blue_gray">Xanh xám</string>
     <string name="theme_name_brown" tools:keep="@string/theme_name_brown">Nâu</string>
     <string name="theme_name_chocolate" tools:keep="@string/theme_name_chocolate">Sô cô la</string>
-    <string name="auto_user_color">Tự động chọn màu</string>
-    <string name="get_layouts_message">Bạn có thể tìm và chia sẻ bố cục tại %s.</string>
-    <string name="settings_screen_about">Giới thiệu</string>
+    <string name="auto_user_color">Tự động chọn màu</string>    <string name="settings_screen_about">Giới thiệu</string>
     <string name="license">Bản quyền về mã nguồn mở</string>
     <string name="dialog_close">Đóng</string>
     <string name="text_tap_languages">Nhấn vào mục ngôn ngữ để mở cài đặt</string>
@@ -169,9 +167,7 @@
     <string name="button_backup">Lưu trữ</string>
     <string name="theme_colors">Màu sắc</string>
     <string name="theme_name_pink" tools:keep="@string/theme_name_pink">Hồng</string>
-    <string name="main_colors">Chỉ hiển thị màu chính</string>
-    <string name="get_colors_message">Bạn có thể tìm và chia sẻ màu sắc tại %s.</string>
-    <string name="label_resize_onehanded_key" tools:keep="@string/label_resize_onehanded_key">Thay đổi kích thước chế độ 1 tay</string>
+    <string name="main_colors">Chỉ hiển thị màu chính</string>    <string name="label_resize_onehanded_key" tools:keep="@string/label_resize_onehanded_key">Thay đổi kích thước chế độ 1 tay</string>
     <string name="add_new_dictionary_title">Thêm từ điển từ file</string>
     <string name="theme_name_darker" tools:keep="@string/theme_name_darker">Màu tối hơn</string>
     <string name="number_row_summary">Luôn hiển thị số hàng</string>
