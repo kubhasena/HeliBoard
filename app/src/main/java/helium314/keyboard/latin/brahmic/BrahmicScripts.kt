@@ -703,6 +703,23 @@ object BrahmicScripts {
 
     fun isVowel(codePoint: Int) = forCodePoint(codePoint)?.isVowel(codePoint) == true
 
+    @JvmStatic
+    fun isAyogavaha(codePoint: Int) = forCodePoint(codePoint)?.isAyogavaha(codePoint) == true
+
+    /** Vowels, matras, and ayogavahas (bindu / visarga / candrabindu) get the letter-key tint. */
+    @JvmStatic
+    fun tintsLetterKey(code: Int, label: String): Boolean {
+        if (code > 0 && tintsLetterCodePoint(code)) return true
+        if (label.isEmpty() || label[0] == '!') return false
+        val first = label.codePointAt(0)
+        return tintsLetterCodePoint(first) || leadingVowel(label) >= 0
+    }
+
+    private fun tintsLetterCodePoint(codePoint: Int): Boolean {
+        val script = forCodePoint(codePoint) ?: return false
+        return script.isVowel(codePoint) || script.isAyogavaha(codePoint)
+    }
+
     /**
      * The vowel a key label stands for. Marks may ride along after it, as in आं or াঁ.
      * A decomposed two-part matra such as ে + া counts as one vowel.

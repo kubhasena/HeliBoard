@@ -61,7 +61,7 @@ interface Colors {
     /** returns a colored drawable selected from [attr], which must contain using R.styleable.KeyboardView_* */
     fun selectAndColorDrawable(attr: TypedArray, color: ColorType): Drawable {
         val drawable = when (color) {
-            KEY_BACKGROUND, MORE_SUGGESTIONS_WORD_BACKGROUND, ACTION_KEY_POPUP_KEYS_BACKGROUND, POPUP_KEYS_BACKGROUND ->
+            KEY_BACKGROUND, BRAHMIC_KEY_BACKGROUND, MORE_SUGGESTIONS_WORD_BACKGROUND, ACTION_KEY_POPUP_KEYS_BACKGROUND, POPUP_KEYS_BACKGROUND ->
                 attr.getDrawable(R.styleable.KeyboardView_keyBackground)
             FUNCTIONAL_KEY_BACKGROUND -> attr.getDrawable(R.styleable.KeyboardView_functionalKeyBackground)
             SPACE_BAR_BACKGROUND -> {
@@ -142,6 +142,7 @@ class DynamicColors(context: Context, override val themeStyle: String, override 
 
     private val backgroundStateList: ColorStateList
     private val keyStateList: ColorStateList
+    private val brahmicKeyStateList: ColorStateList
     private val functionalKeyStateList: ColorStateList
     private val actionKeyStateList: ColorStateList
     private val spaceBarStateList: ColorStateList
@@ -167,6 +168,12 @@ class DynamicColors(context: Context, override val themeStyle: String, override 
     private val adjustedKeyBackground: Int = brighten(keyBackground)
     /** further brightened variant of [adjustedKeyBackground] */
     private val doubleAdjustedKeyBackground: Int = brighten(adjustedKeyBackground)
+    /** Letter-key shade between normal and functional, used for Brahmic vowels / ayogavahas. */
+    private val brahmicKey: Int = ColorUtils.blendARGB(
+        keyBackground,
+        if (!isNight) functionalKey else doubleAdjustedKeyBackground,
+        0.42f
+    )
     private var backgroundSetupDone = false
 
     init {
@@ -261,6 +268,14 @@ class DynamicColors(context: Context, override val themeStyle: String, override 
                 if (!isNight) pressedStateList(gesture, adjustedFunctionalKey)
                 else pressedStateList(adjustedKeyBackground, spaceBar)
         }
+        brahmicKeyStateList = if (hasKeyBorders) {
+            if (themeStyle == STYLE_HOLO) pressedStateList(brahmicKey, brahmicKey)
+            else pressedStateList(brightenOrDarken(brahmicKey, true), brahmicKey)
+        } else {
+            val wash = ColorUtils.setAlphaComponent(brahmicKey, 0x59)
+            if (!isNight) pressedStateList(adjustedFunctionalKey, wash)
+            else pressedStateList(functionalKey, wash)
+        }
         keyTextFilter = colorFilter(keyText)
 
         actionKeyIconColorFilter = when {
@@ -286,6 +301,7 @@ class DynamicColors(context: Context, override val themeStyle: String, override 
         SPACE_BAR_BACKGROUND -> spaceBar
         MORE_SUGGESTIONS_WORD_BACKGROUND, MAIN_BACKGROUND -> background
         KEY_BACKGROUND -> keyBackground
+        BRAHMIC_KEY_BACKGROUND -> brahmicKey
         ACTION_KEY_POPUP_KEYS_BACKGROUND -> if (themeStyle == STYLE_HOLO) adjustedBackground else accent
         STRIP_BACKGROUND -> if (!hasKeyBorders && themeStyle == STYLE_MATERIAL) adjustedBackground else background
         CLIPBOARD_SUGGESTION_BACKGROUND -> keyBackground
@@ -298,6 +314,7 @@ class DynamicColors(context: Context, override val themeStyle: String, override 
         val colorStateList = when (color) {
             MORE_SUGGESTIONS_WORD_BACKGROUND -> backgroundStateList
             KEY_BACKGROUND -> keyStateList
+            BRAHMIC_KEY_BACKGROUND -> brahmicKeyStateList
             FUNCTIONAL_KEY_BACKGROUND -> functionalKeyStateList
             ACTION_KEY_BACKGROUND -> actionKeyStateList
             SPACE_BAR_BACKGROUND -> spaceBarStateList
@@ -389,12 +406,14 @@ class DefaultColors (
     private val keyTextFilter: ColorFilter
     private val suggestionTextFilter = colorFilter(suggestionText)
     private val accentColorFilter = colorFilter(accent)
+    private val brahmicKey: Int = ColorUtils.blendARGB(keyBackground, functionalKey, 0.42f)
 
     /** color filter for the white action key icons in material theme, switches to gray if necessary for contrast */
     private val actionKeyIconColorFilter: ColorFilter?
 
     private val backgroundStateList: ColorStateList
     private val keyStateList: ColorStateList
+    private val brahmicKeyStateList: ColorStateList
     private val functionalKeyStateList: ColorStateList
     private val actionKeyStateList: ColorStateList
     private val spaceBarStateList: ColorStateList
@@ -460,6 +479,12 @@ class DefaultColors (
                 else pressedStateList(brightenOrDarken(accent, true), accent)
             spaceBarStateList = pressedStateList(brightenOrDarken(spaceBar, true), spaceBar)
         }
+        brahmicKeyStateList = if (hasKeyBorders) {
+            if (themeStyle == STYLE_HOLO) pressedStateList(brahmicKey, brahmicKey)
+            else pressedStateList(brightenOrDarken(brahmicKey, true), brahmicKey)
+        } else {
+            pressedStateList(keyBackground, ColorUtils.setAlphaComponent(brahmicKey, 0x59))
+        }
         keyTextFilter = colorFilter(keyText)
         actionKeyIconColorFilter = when {
             themeStyle == STYLE_HOLO -> keyTextFilter
@@ -484,6 +509,7 @@ class DefaultColors (
         SPACE_BAR_BACKGROUND -> spaceBar
         MORE_SUGGESTIONS_WORD_BACKGROUND, MAIN_BACKGROUND -> background
         KEY_BACKGROUND -> keyBackground
+        BRAHMIC_KEY_BACKGROUND -> brahmicKey
         ACTION_KEY_POPUP_KEYS_BACKGROUND -> if (themeStyle == STYLE_HOLO) adjustedBackground else accent
         STRIP_BACKGROUND -> if (!hasKeyBorders && themeStyle == STYLE_MATERIAL) adjustedBackground else background
         NAVIGATION_BAR -> navBar
@@ -496,6 +522,7 @@ class DefaultColors (
         val colorStateList = when (color) {
             MORE_SUGGESTIONS_WORD_BACKGROUND -> backgroundStateList
             KEY_BACKGROUND -> keyStateList
+            BRAHMIC_KEY_BACKGROUND -> brahmicKeyStateList
             FUNCTIONAL_KEY_BACKGROUND -> functionalKeyStateList
             ACTION_KEY_BACKGROUND -> actionKeyStateList
             SPACE_BAR_BACKGROUND -> spaceBarStateList
@@ -630,6 +657,7 @@ enum class ColorType {
     GESTURE_TRAIL,
     GESTURE_PREVIEW,
     KEY_BACKGROUND,
+    BRAHMIC_KEY_BACKGROUND,
     KEY_ICON,
     KEY_TEXT,
     KEY_HINT_TEXT,

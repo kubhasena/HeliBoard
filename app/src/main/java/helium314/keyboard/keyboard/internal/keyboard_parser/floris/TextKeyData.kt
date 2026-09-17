@@ -21,6 +21,7 @@ import helium314.keyboard.keyboard.internal.keyboard_parser.floris.KeyCode.check
 import helium314.keyboard.keyboard.internal.keyboard_parser.floris.KeyLabel.convertFlorisLabel
 import helium314.keyboard.keyboard.internal.keyboard_parser.floris.KeyLabel.rtlLabel
 import helium314.keyboard.latin.RichInputMethodManager
+import helium314.keyboard.latin.brahmic.BrahmicScripts
 import helium314.keyboard.latin.common.Constants
 import helium314.keyboard.latin.common.LocaleUtils.constructLocale
 import helium314.keyboard.latin.common.StringUtils
@@ -361,7 +362,7 @@ sealed interface KeyData : AbstractKeyData {
         var newLabelFlags = labelFlags or additionalLabelFlags or getAdditionalLabelFlags(params)
         val newPopupKeys = popup.merge(getAdditionalPopupKeys(params))
 
-        val background = when (type) {
+        var background = when (type) {
             KeyType.CHARACTER, KeyType.NUMERIC -> Key.BACKGROUND_TYPE_NORMAL
             KeyType.FUNCTION, KeyType.MODIFIER, KeyType.SYSTEM_GUI -> Key.BACKGROUND_TYPE_FUNCTIONAL
             KeyType.PLACEHOLDER, KeyType.UNSPECIFIED -> Key.BACKGROUND_TYPE_EMPTY
@@ -369,6 +370,9 @@ sealed interface KeyData : AbstractKeyData {
             KeyType.ENTER_EDITING -> Key.BACKGROUND_TYPE_ACTION
             KeyType.LOCK -> Key.BACKGROUND_TYPE_FUNCTIONAL
             null -> getDefaultBackground(params)
+        }
+        if (background == Key.BACKGROUND_TYPE_NORMAL && BrahmicScripts.tintsLetterKey(newCode, newLabel)) {
+            background = Key.BACKGROUND_TYPE_BRAHMIC
         }
         if (background == Key.BACKGROUND_TYPE_FUNCTIONAL)
             newLabelFlags = newLabelFlags or Key.LABEL_FLAGS_FOLLOW_FUNCTIONAL_TEXT_COLOR

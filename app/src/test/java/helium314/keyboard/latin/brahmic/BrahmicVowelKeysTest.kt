@@ -98,4 +98,21 @@ class BrahmicVowelKeysTest {
         assertEquals(BrahmicVowelSlot.POPUP_OTHER, slots[0x0906])
         assertEquals(setOf(0x0906, 0x093E), BrahmicVowelRemap.build(slots, dependentContext = true).pairedCodePoints)
     }
+
+    @Test
+    fun vowelsAndAyogavahasTintLetterKeys() {
+        assertTrue(BrahmicScripts.tintsLetterKey(0x0906, "आ"))
+        assertTrue(BrahmicScripts.tintsLetterKey(0x093E, "ा"))
+        assertTrue(BrahmicScripts.tintsLetterKey(0x0905, "अ"))
+        assertTrue(BrahmicScripts.tintsLetterKey(0x0901, "ँ"))
+        assertTrue(BrahmicScripts.tintsLetterKey(0x0902, "ं"))
+        assertTrue(BrahmicScripts.tintsLetterKey(0x0903, "ः"))
+        assertTrue(BrahmicScripts.tintsLetterKey(0, "आं"))
+        assertTrue(BrahmicScripts.tintsLetterKey(0x0B83, "ஃ")) // Tamil aytam
+        assertFalse(BrahmicScripts.tintsLetterKey(0x0915, "क"))
+        assertFalse(BrahmicScripts.tintsLetterKey(0x094D, "्"))
+        assertFalse(BrahmicScripts.tintsLetterKey(0x093C, "़"))
+        assertFalse(BrahmicScripts.tintsLetterKey(0, "k"))
+        assertFalse(BrahmicScripts.tintsLetterKey(0, "!icon/shift_key"))
+    }
 }
