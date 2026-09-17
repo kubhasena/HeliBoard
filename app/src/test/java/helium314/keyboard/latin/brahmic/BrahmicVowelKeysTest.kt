@@ -109,8 +109,9 @@ class BrahmicVowelKeysTest {
         assertTrue(BrahmicScripts.tintsLetterKey(0x0903, "ः"))
         assertTrue(BrahmicScripts.tintsLetterKey(0, "आं"))
         assertTrue(BrahmicScripts.tintsLetterKey(0x0B83, "ஃ")) // Tamil aytam
+        assertTrue(BrahmicScripts.tintsLetterKey(0x094D, "्"))
+        assertTrue(BrahmicScripts.tintsLetterKey(0x093D, "ऽ"))
         assertFalse(BrahmicScripts.tintsLetterKey(0x0915, "क"))
-        assertFalse(BrahmicScripts.tintsLetterKey(0x094D, "्"))
         assertFalse(BrahmicScripts.tintsLetterKey(0x093C, "़"))
         assertFalse(BrahmicScripts.tintsLetterKey(0, "k"))
         assertFalse(BrahmicScripts.tintsLetterKey(0, "!icon/shift_key"))

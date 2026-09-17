@@ -706,7 +706,7 @@ object BrahmicScripts {
     @JvmStatic
     fun isAyogavaha(codePoint: Int) = forCodePoint(codePoint)?.isAyogavaha(codePoint) == true
 
-    /** Vowels, matras, and ayogavahas (bindu / visarga / candrabindu) get the letter-key tint. */
+    /** Vowels, matras, ayogavahas, virama, and avagraha get the distinct label color. */
     @JvmStatic
     fun tintsLetterKey(code: Int, label: String): Boolean {
         if (code > 0 && tintsLetterCodePoint(code)) return true
@@ -716,9 +716,15 @@ object BrahmicScripts {
     }
 
     private fun tintsLetterCodePoint(codePoint: Int): Boolean {
+        if (codePoint in avagrahas) return true
         val script = forCodePoint(codePoint) ?: return false
-        return script.isVowel(codePoint) || script.isAyogavaha(codePoint)
+        return script.isVowel(codePoint) || script.isAyogavaha(codePoint) || script.isVirama(codePoint)
     }
+
+    private val avagrahas = intArrayOf(
+        0x093D, 0x09BD, 0x0ABD, 0x0B3D, 0x0C3D, 0x0CBD, 0x0D3D,
+        0x111C1, 0x1133D, 0x113B7,
+    )
 
     /**
      * The vowel a key label stands for. Marks may ride along after it, as in आं or াঁ.
