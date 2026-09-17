@@ -216,12 +216,12 @@ class KeyboardParser(private val params: KeyboardParams, private val context: Co
             || lastNormalRow.any { it.isSpacer } || rowAboveLast.any { it.isSpacer } // annoying to deal with, and probably no resize wanted anyway
             || lastNormalRow.any { it.mWidth != lastNormalRowKeyWidth } || rowAboveLast.any { it.mWidth != rowAboveLastNormalRowKeyWidth })
             return keysInRows
-        val numberOfKeysInLast = lastNormalRow.count { it.isLetterBackground }
+        val numberOfKeysInLast = lastNormalRow.count { it.mBackgroundType == Key.BACKGROUND_TYPE_NORMAL }
         val widthBefore = numberOfKeysInLast * lastNormalRowKeyWidth
         val widthAfter = numberOfKeysInLast * rowAboveLastNormalRowKeyWidth
         val spacerWidth = (widthBefore - widthAfter) / 2
         // resize keys
-        lastNormalRow.forEach { if (it.isLetterBackground) it.mWidth = rowAboveLastNormalRowKeyWidth }
+        lastNormalRow.forEach { if (it.mBackgroundType == Key.BACKGROUND_TYPE_NORMAL) it.mWidth = rowAboveLastNormalRowKeyWidth }
         // add spacers
         val lastNormalFullRow = keysInRows[keysInRows.lastIndex - 1]
         lastNormalFullRow.add(lastNormalFullRow.indexOfFirst { it == lastNormalRow.first() }, KeyParams.newSpacer(params, spacerWidth))

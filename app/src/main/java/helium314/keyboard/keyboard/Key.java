@@ -78,6 +78,8 @@ public class Key implements Comparable<Key> {
     public static final int LABEL_FLAGS_FROM_CUSTOM_ACTION_LABEL = 0x40000;
     public static final int LABEL_FLAGS_FOLLOW_FUNCTIONAL_TEXT_COLOR = 0x80000;
     public static final int LABEL_FLAGS_KEEP_BACKGROUND_ASPECT_RATIO = 0x100000;
+    /** Use a distinct color for Brahmic vowel / ayogavaha labels. */
+    public static final int LABEL_FLAGS_FOLLOW_BRAHMIC_TEXT_COLOR = 0x200000;
     public static final int LABEL_FLAGS_DISABLE_HINT_LABEL = 0x40000000;
 
     /** Icon to display instead of a label. Icon takes precedence over a label */
@@ -138,8 +140,6 @@ public class Key implements Comparable<Key> {
     public static final int BACKGROUND_TYPE_FUNCTIONAL = 2;
     public static final int BACKGROUND_TYPE_ACTION = 3;
     public static final int BACKGROUND_TYPE_SPACEBAR = 4;
-    /** Letter keys for Brahmic vowels / ayogavahas; same shape as normal, distinct shade. */
-    public static final int BACKGROUND_TYPE_BRAHMIC = 5;
 
     private final int mActionFlags;
     private static final int ACTION_FLAGS_IS_REPEATABLE = 0x01;
@@ -472,7 +472,6 @@ public class Key implements Comparable<Key> {
             case BACKGROUND_TYPE_FUNCTIONAL -> "functional";
             case BACKGROUND_TYPE_ACTION -> "action";
             case BACKGROUND_TYPE_SPACEBAR -> "spacebar";
-            case BACKGROUND_TYPE_BRAHMIC -> "brahmic";
             default -> null;
         };
     }
@@ -518,10 +517,6 @@ public class Key implements Comparable<Key> {
 
     public final boolean hasActionKeyBackground() {
         return mBackgroundType == BACKGROUND_TYPE_ACTION;
-    }
-
-    public final boolean isLetterBackground() {
-        return mBackgroundType == BACKGROUND_TYPE_NORMAL || mBackgroundType == BACKGROUND_TYPE_BRAHMIC;
     }
 
     public final boolean isShift() {
@@ -584,6 +579,9 @@ public class Key implements Comparable<Key> {
     public final int selectTextColor(final KeyDrawParams params) {
         if ((mLabelFlags & LABEL_FLAGS_FOLLOW_FUNCTIONAL_TEXT_COLOR) != 0) {
             return params.mFunctionalTextColor;
+        }
+        if ((mLabelFlags & LABEL_FLAGS_FOLLOW_BRAHMIC_TEXT_COLOR) != 0) {
+            return params.mBrahmicTextColor;
         }
         return isShiftedLetterActivated() ? params.mTextInactivatedColor : params.mTextColor;
     }
@@ -923,8 +921,6 @@ public class Key implements Comparable<Key> {
             new KeyBackgroundState(android.R.attr.state_active),
             // 4: BACKGROUND_TYPE_SPACEBAR
             new KeyBackgroundState(),
-            // 5: BACKGROUND_TYPE_BRAHMIC
-            new KeyBackgroundState(),
         };
     }
 
@@ -938,15 +934,6 @@ public class Key implements Comparable<Key> {
             @NonNull final Drawable functionalKeyBackground,
             @NonNull final Drawable spacebarBackground,
             @NonNull final Drawable actionKeyBackground) {
-        return selectBackgroundDrawable(keyBackground, functionalKeyBackground, spacebarBackground,
-                actionKeyBackground, keyBackground);
-    }
-
-    public final Drawable selectBackgroundDrawable(@NonNull final Drawable keyBackground,
-            @NonNull final Drawable functionalKeyBackground,
-            @NonNull final Drawable spacebarBackground,
-            @NonNull final Drawable actionKeyBackground,
-            @NonNull final Drawable brahmicKeyBackground) {
         final Drawable background;
         if (hasActionKeyBackground()) {
             background = actionKeyBackground;
@@ -954,8 +941,6 @@ public class Key implements Comparable<Key> {
             background = functionalKeyBackground;
         } else if (mBackgroundType == BACKGROUND_TYPE_SPACEBAR) {
             background = spacebarBackground;
-        } else if (mBackgroundType == BACKGROUND_TYPE_BRAHMIC) {
-            background = brahmicKeyBackground;
         } else {
             background = keyBackground;
         }
@@ -1024,10 +1009,6 @@ public class Key implements Comparable<Key> {
         @Nullable public final KeyVisualAttributes mKeyVisualAttributes;
         @Nullable final OptionalAttributes mOptionalAttributes;
         public final boolean mEnabled;
-
-        public boolean isLetterBackground() {
-            return mBackgroundType == BACKGROUND_TYPE_NORMAL || mBackgroundType == BACKGROUND_TYPE_BRAHMIC;
-        }
 
         public static KeyParams newSpacer(final KeyboardParams params, final float width) {
             final KeyParams spacer = new KeyParams(params);

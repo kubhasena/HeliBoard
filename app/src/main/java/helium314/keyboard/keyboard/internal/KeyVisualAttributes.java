@@ -37,6 +37,7 @@ public final class KeyVisualAttributes {
     public final int mTextInactivatedColor;
     public final int mTextShadowColor;
     public final int mFunctionalTextColor;
+    public final int mBrahmicTextColor;
     public final int mHintLetterColor;
     public final int mHintLabelColor;
     public final int mShiftedLetterHintInactivatedColor;
@@ -121,6 +122,7 @@ public final class KeyVisualAttributes {
         // when? -> mKeyTextShadowRadius > 0, but it's always set to -1 (in theme) -> maybe play with this?
         mTextShadowColor = keyAttr.getColor(R.styleable.Keyboard_Key_keyTextShadowColor, 0);
         mFunctionalTextColor = colors.get(ColorType.FUNCTIONAL_KEY_TEXT);
+        mBrahmicTextColor = colors.get(ColorType.BRAHMIC_KEY_TEXT);
         mHintLetterColor = colors.get(ColorType.KEY_HINT_TEXT);
         mHintLabelColor = colors.get(ColorType.KEY_TEXT);
         // when? -> hasShiftedLetterHint and not isShiftedLetterActivated -> both are label flags

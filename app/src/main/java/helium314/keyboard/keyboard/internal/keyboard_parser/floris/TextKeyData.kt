@@ -362,7 +362,7 @@ sealed interface KeyData : AbstractKeyData {
         var newLabelFlags = labelFlags or additionalLabelFlags or getAdditionalLabelFlags(params)
         val newPopupKeys = popup.merge(getAdditionalPopupKeys(params))
 
-        var background = when (type) {
+        val background = when (type) {
             KeyType.CHARACTER, KeyType.NUMERIC -> Key.BACKGROUND_TYPE_NORMAL
             KeyType.FUNCTION, KeyType.MODIFIER, KeyType.SYSTEM_GUI -> Key.BACKGROUND_TYPE_FUNCTIONAL
             KeyType.PLACEHOLDER, KeyType.UNSPECIFIED -> Key.BACKGROUND_TYPE_EMPTY
@@ -371,8 +371,8 @@ sealed interface KeyData : AbstractKeyData {
             KeyType.LOCK -> Key.BACKGROUND_TYPE_FUNCTIONAL
             null -> getDefaultBackground(params)
         }
-        if (background == Key.BACKGROUND_TYPE_NORMAL && BrahmicScripts.tintsLetterKey(newCode, newLabel)) {
-            background = Key.BACKGROUND_TYPE_BRAHMIC
+        if (BrahmicScripts.tintsLetterKey(newCode, newLabel)) {
+            newLabelFlags = newLabelFlags or Key.LABEL_FLAGS_FOLLOW_BRAHMIC_TEXT_COLOR
         }
         if (background == Key.BACKGROUND_TYPE_FUNCTIONAL)
             newLabelFlags = newLabelFlags or Key.LABEL_FLAGS_FOLLOW_FUNCTIONAL_TEXT_COLOR
