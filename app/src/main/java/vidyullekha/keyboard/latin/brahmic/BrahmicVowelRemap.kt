@@ -17,7 +17,7 @@ package vidyullekha.keyboard.latin.brahmic
 class BrahmicVowelRemap private constructor(
     private val map: Map<Int, Int>,
     private val inverse: Map<Int, Int>,
-    /** Both forms of every paired vowel. The rewriter must leave these alone, the keys are exact. */
+    /** Both forms of every paired vowel. */
     @JvmField val pairedCodePoints: Set<Int>,
 ) {
     @JvmField

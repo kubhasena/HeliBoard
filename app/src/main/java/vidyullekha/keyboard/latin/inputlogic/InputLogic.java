@@ -2879,7 +2879,8 @@ public final class InputLogic {
 
     private static BrahmicConfig brahmicConfig(final SettingsValues sv) {
         return BrahmicConfig.from(sv.mBrahmicInputMode, sv.mBrahmicAyogavahaStripVirama,
-                sv.mBrahmicNuktaPartOfConsonant, BrahmicUiState.pairedVowels);
+                sv.mBrahmicNuktaPartOfConsonant, BrahmicUiState.pairedVowels,
+                BrahmicUiState.labelsFollowContext, BrahmicUiState.vowelSlots);
     }
 
     @Nullable

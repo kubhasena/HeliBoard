@@ -18,8 +18,26 @@ class BrahmicInputTest {
         nuktaPartOfConsonant = false,
     )
     private val pairedAa = setOf(0x0906, 0x093E) // आ and ा both have a key
-    private val contextualPairedAa = BrahmicConfig(BrahmicInputMode.CONTEXTUAL, pairedVowels = pairedAa)
-    private val phoneticPairedAa = BrahmicConfig(BrahmicInputMode.PHONETIC, pairedVowels = pairedAa)
+    // labels already remapped: the key itself sent the form that was pressed
+    private val contextualPairedAa = BrahmicConfig(
+        BrahmicInputMode.CONTEXTUAL, pairedVowels = pairedAa, labelsFollowContext = true,
+    )
+    private val phoneticPairedAa = BrahmicConfig(
+        BrahmicInputMode.PHONETIC, pairedVowels = pairedAa, labelsFollowContext = true,
+    )
+    // labels stay as the layout wrote them; easy key is आ, hard key is ा (devanagari.json)
+    private val aaEasySlots = mapOf(0x0906 to BrahmicVowelSlot.UNSHIFTED, 0x093E to BrahmicVowelSlot.POPUP_MAIN)
+    private val contextualLayoutAa = BrahmicConfig(
+        BrahmicInputMode.CONTEXTUAL, pairedVowels = pairedAa, vowelSlots = aaEasySlots,
+    )
+    private val phoneticLayoutAa = BrahmicConfig(
+        BrahmicInputMode.PHONETIC, pairedVowels = pairedAa, vowelSlots = aaEasySlots,
+    )
+    // hindi.json: easy key is the matra, hard key is the independent vowel
+    private val matraEasySlots = mapOf(0x093E to BrahmicVowelSlot.UNSHIFTED, 0x0906 to BrahmicVowelSlot.SHIFTED)
+    private val contextualHindiAa = BrahmicConfig(
+        BrahmicInputMode.CONTEXTUAL, pairedVowels = pairedAa, vowelSlots = matraEasySlots,
+    )
 
     private fun insert(before: String, input: String, cfg: BrahmicConfig) =
         BrahmicInput.applyInsert(before, input, cfg)
@@ -245,6 +263,26 @@ class BrahmicInputTest {
     fun unpairedVowelsKeepBeingRewritten() {
         // ि has no key of its own in this layout, so इ after a consonant still becomes a matra
         assertEquals("कि", type("क", "इ", contextualPairedAa))
+        assertEquals("कि", type("क", "इ", contextualLayoutAa))
+    }
+
+    @Test
+    fun layoutVowelEasyKeyFollowsContext() {
+        // labels stay आ / ा; the easy key still types I
+        assertEquals("आ", type("", "आ", contextualLayoutAa))
+        assertEquals("का", type("क", "आ", contextualLayoutAa))
+        assertEquals("का", type("क्", "आ", phoneticLayoutAa))
+        assertEquals("आ", type("", "ा", contextualHindiAa))
+        assertEquals("का", type("क", "ा", contextualHindiAa))
+    }
+
+    @Test
+    fun layoutVowelHardKeyTypesTheOpposite() {
+        assertEquals("ा", type("", "ा", contextualLayoutAa))
+        assertEquals("कआ", type("क", "ा", contextualLayoutAa))
+        assertEquals("क्आ", type("क्", "ा", phoneticLayoutAa))
+        assertEquals("ा", type("", "आ", contextualHindiAa))
+        assertEquals("कआ", type("क", "आ", contextualHindiAa))
     }
 
     @Test
@@ -257,6 +295,9 @@ class BrahmicInputTest {
         assertEquals("कां", type("क", "ां", contextual))
         // paired vowels are handed over in their final form, marks included
         assertEquals("कआं", type("क", "आं", contextualPairedAa))
+        // labels-off: the easy key still converts, and its mark comes along
+        assertEquals("कां", type("क", "आं", contextualLayoutAa))
+        assertEquals("कआं", type("क", "ां", contextualLayoutAa))
     }
 
     @Test

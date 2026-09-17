@@ -6,10 +6,16 @@ data class BrahmicConfig(
     val ayogavahaStripVirama: Boolean = false,
     val nuktaPartOfConsonant: Boolean = true,
     /**
-     * Vowels the keyboard hands over in their final form because it offers a key for each of the
-     * two forms. Insertion of these is never rewritten, so the anti-contextual key keeps working.
+     * Vowels the layout offers in both independent and matra form. When [labelsFollowContext] is
+     * true the keys already send the chosen form, so insertion of these is left as typed. When it
+     * is false the rewriter still maps the easy key to the contextual form and the hard key to the
+     * opposite, using [vowelSlots].
      */
     val pairedVowels: Set<Int> = emptySet(),
+    /** True when vowel keys have already been remapped to match the cursor. */
+    val labelsFollowContext: Boolean = false,
+    /** Easiest slot rank per vowel code point, see [BrahmicVowelSlot]. */
+    val vowelSlots: Map<Int, Int> = emptyMap(),
 ) {
     companion object {
         @JvmStatic
@@ -18,7 +24,16 @@ data class BrahmicConfig(
             ayogavahaStripVirama: Boolean,
             nuktaPartOfConsonant: Boolean,
             pairedVowels: Set<Int>,
-        ) = BrahmicConfig(BrahmicInputMode.fromInt(mode), ayogavahaStripVirama, nuktaPartOfConsonant, pairedVowels)
+            labelsFollowContext: Boolean,
+            vowelSlots: Map<Int, Int>,
+        ) = BrahmicConfig(
+            BrahmicInputMode.fromInt(mode),
+            ayogavahaStripVirama,
+            nuktaPartOfConsonant,
+            pairedVowels,
+            labelsFollowContext,
+            vowelSlots,
+        )
     }
 }
 
@@ -29,7 +44,7 @@ data class BrahmicEdit(
 
 /**
  * Runtime state shared between the keyboard and the rewriter. KeyboardId reads [dependentVowels]
- * when building, and the keyboard publishes [pairedVowels] once it knows the active layout.
+ * when building, and the keyboard publishes the active layout's vowel slots once it has scanned them.
  */
 object BrahmicUiState {
     @JvmField
@@ -39,9 +54,24 @@ object BrahmicUiState {
     @JvmField
     var pairedVowels: Set<Int> = emptySet()
 
+    @JvmField
+    var labelsFollowContext: Boolean = false
+
+    @JvmField
+    var vowelSlots: Map<Int, Int> = emptyMap()
+
+    @JvmStatic
+    fun setLayoutVowels(paired: Set<Int>, slots: Map<Int, Int>, followContext: Boolean) {
+        pairedVowels = paired
+        vowelSlots = slots
+        labelsFollowContext = followContext
+    }
+
     @JvmStatic
     fun clearPairedVowels() {
         pairedVowels = emptySet()
+        vowelSlots = emptyMap()
+        labelsFollowContext = false
     }
 
     /** @return true if the value changed */
@@ -164,13 +194,18 @@ object BrahmicInput {
             return null
         }
 
-        // The keyboard has a key for each form of this vowel and already picked one, so keep the
-        // form that was pressed. Only replacing the phonetic virama still applies, that is
-        // mechanical rather than a choice between the two forms.
+        // Both forms of this vowel have a key. When labels already follow the cursor, the key
+        // itself chose the form. When they do not, the easy key still types the contextual form
+        // and the hard key types the opposite, even though the printed labels stay as the layout
+        // wrote them. Replacing a phonetic virama with a matra is mechanical either way.
         if (cp in cfg.pairedVowels) {
-            return if (table.isDependentVowel(cp) && cfg.mode.usesPhoneticVirama && unit is Trailing.DeadConsonant)
-                BrahmicEdit(1, Character.toString(cp))
-            else null
+            val outCp = if (cfg.labelsFollowContext || cfg.vowelSlots.isEmpty()) cp
+                else BrahmicVowelRemap.build(cfg.vowelSlots, wantsDependent).remapCodePoint(cp)
+            val out = Character.toString(outCp)
+            return if (table.isDependentVowel(outCp) && cfg.mode.usesPhoneticVirama && unit is Trailing.DeadConsonant)
+                BrahmicEdit(1, out)
+            else if (outCp == cp) null
+            else BrahmicEdit(0, out)
         }
 
         if (wantsDependent) {

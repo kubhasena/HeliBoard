@@ -23,6 +23,8 @@ import vidyullekha.keyboard.latin.SuggestedWords.SuggestedWordInfo
 import vidyullekha.keyboard.latin.common.Constants
 import vidyullekha.keyboard.latin.common.LocaleUtils.constructLocale
 import vidyullekha.keyboard.latin.brahmic.BrahmicUiState
+import vidyullekha.keyboard.latin.brahmic.BrahmicVowelRemap
+import vidyullekha.keyboard.latin.brahmic.BrahmicVowelSlot
 import vidyullekha.keyboard.latin.common.StringUtils
 import vidyullekha.keyboard.latin.inputlogic.InputLogic
 import vidyullekha.keyboard.latin.inputlogic.SpaceState
@@ -788,12 +790,30 @@ class InputLogicTest {
 
     @Test fun brahmicPairedVowelKeyIsNotRewritten() {
         setBrahmicMode(1)
-        setBrahmicPairedVowels(0x0906, 0x093E) // the layout has a key for both आ and ा
+        setBrahmicPairedVowels(0x0906, 0x093E) // labels already remapped: keep the form that was pressed
         input('क')
         input('आ')
         assertEquals("कआ", textBeforeCursor)
         input('ा')
         assertEquals("कआा", textBeforeCursor)
+    }
+
+    @Test fun brahmicLayoutVowelEasyKeyFollowsContext() {
+        setBrahmicMode(1)
+        setBrahmicLayoutVowels(mapOf(0x0906 to BrahmicVowelSlot.UNSHIFTED, 0x093E to BrahmicVowelSlot.POPUP_MAIN))
+        input('क')
+        input('आ')
+        assertEquals("का", textBeforeCursor)
+    }
+
+    @Test fun brahmicLayoutVowelHardKeyTypesOpposite() {
+        setBrahmicMode(1)
+        setBrahmicLayoutVowels(mapOf(0x0906 to BrahmicVowelSlot.UNSHIFTED, 0x093E to BrahmicVowelSlot.POPUP_MAIN))
+        input('ा')
+        assertEquals("ा", textBeforeCursor)
+        setText("क")
+        input('ा')
+        assertEquals("कआ", textBeforeCursor)
     }
 
     @Test fun brahmicPairedMatraStillReplacesPhoneticVirama() {
@@ -859,7 +879,15 @@ class InputLogicTest {
     }
 
     private fun setBrahmicPairedVowels(vararg codePoints: Int) {
-        BrahmicUiState.pairedVowels = codePoints.toSet()
+        BrahmicUiState.setLayoutVowels(codePoints.toSet(), emptyMap(), true)
+    }
+
+    private fun setBrahmicLayoutVowels(slots: Map<Int, Int>) {
+        BrahmicUiState.setLayoutVowels(
+            BrahmicVowelRemap.build(slots, false).pairedCodePoints,
+            slots,
+            false,
+        )
     }
 
     private fun setSuggestionsEnabled(enabled: Boolean) {

@@ -16,6 +16,7 @@ import vidyullekha.keyboard.keyboard.internal.keyboard_parser.floris.SimplePopup
 import vidyullekha.keyboard.keyboard.internal.keyboard_parser.floris.TextKeyData
 import vidyullekha.keyboard.latin.brahmic.BrahmicInputMode
 import vidyullekha.keyboard.latin.brahmic.BrahmicUiState
+import vidyullekha.keyboard.latin.brahmic.BrahmicVowelRemap
 import vidyullekha.keyboard.latin.common.isEmoji
 import vidyullekha.keyboard.latin.define.DebugFlags
 import vidyullekha.keyboard.latin.settings.Settings
@@ -48,12 +49,20 @@ class KeyboardParser(private val params: KeyboardParams, private val context: Co
     fun parseLayout(): ArrayList<ArrayList<KeyParams>> {
         params.readAttributes(context, null)
         if (params.mId.element.isAlphabet) {
-            if (params.mId.brahmicDependentVowels != null) {
-                params.mBrahmicVowelRemap = BrahmicVowelKeys.remapFor(params, context)
-                BrahmicUiState.pairedVowels = params.mBrahmicVowelRemap.pairedCodePoints
-            } else if (Settings.getValues().mBrahmicInputMode != BrahmicInputMode.GLYPHIC.ordinal) {
-                // labels are off, but the rewriter still needs to know which vowels have both forms
-                BrahmicUiState.pairedVowels = BrahmicVowelKeys.pairsFor(params, context)
+            if (Settings.getValues().mBrahmicInputMode == BrahmicInputMode.GLYPHIC.ordinal) {
+                BrahmicUiState.clearPairedVowels()
+            } else {
+                val slots = LayoutParser.brahmicVowelSlots(params, context)
+                val followContext = params.mId.brahmicDependentVowels != null
+                val remap = if (followContext) {
+                    BrahmicVowelRemap.build(slots, params.mId.brahmicDependentVowels!!)
+                } else {
+                    BrahmicVowelRemap.build(slots, false)
+                }
+                if (followContext) params.mBrahmicVowelRemap = remap
+                // labels-off still publishes slots so the rewriter can map easy→contextual
+                // and hard→opposite without changing what the keys show
+                BrahmicUiState.setLayoutVowels(remap.pairedCodePoints, slots, followContext)
             }
         }
 
